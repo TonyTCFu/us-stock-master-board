@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>美股總看板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#f4f1ea; --surface:#fffdf8; --surface2:#ece7db; --ink:#1c1a15; --ink2:#5c564a;
+  --line:#d8d0bf; --accent:#0f5c4d; --accent-ink:#ffffff;
+  --up:#b3352b; --down:#1d7a4f; /* 台式習慣之外：美股慣例 綠漲紅跌？ 本頁採國際慣例：漲綠、跌紅，見圖例 */
+  --up:#1d7a4f; --down:#b3352b;
+  --warn:#9a6206; --warnbg:#fbf0d3; --chip:#e7e1d2;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14161a; --surface:#1e2126; --surface2:#262a31; --ink:#ece9e2; --ink2:#a9a499;
+    --line:#3a3f47; --accent:#2ea88a; --accent-ink:#0c1512;
+    --up:#4cc38a; --down:#f0766b; --warn:#e8b34b; --warnbg:#3a2f14; --chip:#2c3038;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.65;font-size:16px}
+.num{font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+h1{font-family:"Noto Serif TC",serif;font-size:30px;margin:0 0 4px;letter-spacing:.02em}
+h2{font-family:"Noto Serif TC",serif;font-size:21px;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h3{font-size:16px;margin:0 0 6px}
+p{margin:0 0 10px}
+.small{font-size:13px;color:var(--ink2)}
+.fresh{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);
+  padding:10px 14px;font-size:13.5px;color:var(--ink2);margin:14px 0 18px}
+.fresh b{color:var(--ink)}
+.lede{font-size:16.5px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 6px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;min-width:0}
+.stat .k{font-size:12.5px;color:var(--ink2)}
+.stat .v{font-size:21px;font-weight:900}
+.stat .s{font-size:12.5px;color:var(--ink2);white-space:normal}
+.up{color:var(--up)} .down{color:var(--down)}
+/* tabs */
+.tabs{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0 8px;margin-top:14px}
+.tabrow{display:flex;flex-wrap:wrap;gap:8px}
+.tabbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  border-radius:999px;padding:8px 16px;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.tabbtn .chg{font-weight:500;font-size:12.5px;margin-left:6px}
+.tabbtn[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tabbtn[aria-selected="true"] .chg{color:inherit;opacity:.85}
+.tabbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{display:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;margin-top:6px}
+.panel.active{display:block}
+.p-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.p-head .name{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:900}
+.p-head .full{color:var(--ink2);font-size:14px}
+.pricebox{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline}
+.bigprice{font-size:34px;font-weight:900}
+.bigchg{font-size:18px;font-weight:700}
+.plain{font-size:16.5px;background:var(--surface2);border-radius:var(--radius);padding:12px 14px;margin:12px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.box{border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.box h3{border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:8px}
+.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:5px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px dotted var(--line)}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--ink2)} .kv .v{font-weight:700;text-align:right}
+.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700;background:var(--chip)}
+.badge.warn{background:var(--warnbg);color:var(--warn)}
+.badge.act{background:var(--accent);color:var(--accent-ink)}
+.orig{display:inline-block;margin-top:16px;font-weight:700;color:var(--accent)}
+.livebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+button.refresh{appearance:none;border:none;background:var(--accent);color:var(--accent-ink);
+  border-radius:8px;padding:9px 18px;font:inherit;font-weight:700;cursor:pointer}
+button.refresh:disabled{opacity:.55;cursor:wait}
+.liveval{font-weight:700}
+/* overview mini grid */
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.minicard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 14px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;width:100%}
+.minicard .t{font-weight:900;font-size:17px}
+.minicard .p{font-size:19px;font-weight:700}
+.minicard:hover{border-color:var(--accent)}
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--ink2);font-size:12.5px;border-bottom:2px solid var(--ink)}
+tfoot td{font-weight:900;border-top:2px solid var(--ink);border-bottom:none}
+.neg{color:var(--down)} .pos{color:var(--up)}
+/* events */
+.ev{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:none}
+.ev .d{flex:0 0 64px;font-weight:900}
+.ev .tag{margin-left:8px}
+/* discipline */
+.disc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--ink2)}
+@media (max-width:720px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat .v{font-size:17px}
+  .grid2,.disc{grid-template-columns:1fr}
+  .mini{grid-template-columns:1fr 1fr}
+  h1{font-size:25px}
+  /* wide table -> stacked cards */
+  table.stack thead{display:none}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+  table.stack tr{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;padding:8px 6px;background:var(--surface)}
+  table.stack td{border-bottom:1px dotted var(--line);text-align:right;display:flex;justify-content:space-between;gap:10px}
+  table.stack td::before{content:attr(data-label);color:var(--ink2);font-size:12.5px;text-align:left}
+  table.stack td:first-child{font-weight:900;font-size:16px}
+  table.stack tfoot{display:block}
+  table.stack tfoot tr{border:none;background:none;padding:0}
+  table.stack tfoot td{display:flex}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>美股總看板</h1>
+<p class="small">九個個股看板合併一頁，標籤切換；損益表為同一個帳戶的完整持倉。</p>
+
+<div class="fresh">
+  <b>時效：</b>股價與漲跌幅為 <b>2026-11-04 正式收盤</b>（美東）；期權牆位與 Max Pain 為 <b>11-03 快照（期權截至 11-03）</b>，口徑逐檔標明；損益按 11-04 收盤結算。本頁更新於 2026-11-05。即時行情請按各面板的「刷新行情」，與收盤基準分開顯示，不混用。
+</div>
+
+<h2>總覽（11-04 收盤）</h2>
+<p class="lede">「大盤漲、AI 硬體跌」的分化日：道指 <b>+3.03%</b>、標普 <b>+1.58%</b>、納指 <b>+1.44%</b>，費城半導體指數約 <b>-3.3%</b>；九站 <b>1 漲 8 跌</b>，只有 HOOD（+2.02%）收漲，ETN 跌 9.86% 最深、MU 跌 7.00%。主因是中期選舉後市場擔心數據中心審批放緩——這是政策情緒，不是九隻當天都出了公司利空。HOOD 規則 B 全出 5 股已於 11-02 收盤確認成立，11-03、11-04 連續收回 $85 不取消觸發，持倉仍按 5 股計、未預設已賣出。</p>
+
+<div class="stats">
+  <div class="stat"><div class="k">帳戶總值（含 SPCX）</div><div class="v num">$13,067.51</div><div class="s">現金 $2,788.53 ＋ 持倉市值 $10,278.98</div></div>
+  <div class="stat"><div class="k">累計損益（本金 $14,693.28）</div><div class="v num down">-$1,625.77</div><div class="s">-11.06%（按 11-04 收盤結算）</div></div>
+  <div class="stat"><div class="k">目標總值（不含 SPCX）</div><div class="v num">$11,300.55</div><div class="s">目標 $13,843.33（2027-01-06 前 +5%）</div></div>
+  <div class="stat"><div class="k">距目標</div><div class="v num">還需 +$2,542.78</div><div class="s">+22.50%，已走完 30／92 天、剩餘 62 天｜熱度 $380.96（3.37%，上限 6%）</div></div>
+</div>
+
+<div class="mini" id="miniGrid" aria-label="九站收盤速覽"></div>
+
+<div class="tabs">
+  <div class="tabrow" role="tablist" aria-label="股票與損益表切換" id="tabRow"></div>
+</div>
+
+<main id="panels"></main>
+
+<h2>事件雷達</h2>
+<p class="small">近期已發生的關鍵落點，加上未來幾週會改變持倉定價的已知事件。事件前 1–2 個交易日依「事件前概率卡」紀律先做情境與預承諾動作，不等收盤後才追價。</p>
+<div id="events"></div>
+
+<h2>策略紀律（策略 v2）</h2>
+<div class="disc">
+  <div class="box">
+    <h3>倉位與風險</h3>
+    <ul>
+      <li><b>核心／衛星雙軌：</b>核心倉長期持有、衛星倉按訊號進出，兩軌不混算。</li>
+      <li><b>熱度上限：</b>1R ＝ 總值 1%；總熱度上限 6%，目前 <span class="num">$380.96（3.37%）</span>，在上限內。</li>
+      <li><b>節流閥：</b>未觸發（距一檔線 <span class="num">$11,257.28</span> 僅 <span class="num">$43.27</span>）。</li>
+      <li><b>目標：</b><span class="num">$13,843.33</span>（基線 <span class="num">$13,184.12</span>，2026-10-06 起算，2027-01-06 前達 +5%）；進度已走完 30／92 天、剩 62 天；11-18 做 v2 首次總覆核＋目標可行性覆核。</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>買入三模式</h3>
+    <ul>
+      <li><b>A 跌深分檔：</b>跌入預設價格帶、論點未破，分檔買進。</li>
+      <li><b>B 轉強金字塔：</b>轉強確認後逐級加倉，越漲越小筆。</li>
+      <li><b>C 財報後 PEAD：</b>財報超預期且股價順勢反應，順著財報後的走勢跟進。</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>賣出四類</h3>
+    <ul>
+      <li><b>基本面破裂：</b>論點被事實推翻就出，不等價格。</li>
+      <li><b>災難兜底：</b>收盤跌破預設兜底價，啟動核對與退出程序。</li>
+      <li><b>落袋：</b>漲幅達預設門檻，先鎖一部分利潤（建議一律換算成整股數）。</li>
+      <li><b>時間止損：</b>到期複核日論點仍未兌現，按規則處理。</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>執行口徑</h3>
+    <ul>
+      <li>所有觸發以<b>正式收盤價</b>為準，盤後價不當收盤用。</li>
+      <li>訊號只是提示，最後下單永遠由人確認；比例建議先換算成整股數再寫。</li>
+      <li>期權牆位（市場持倉算出的集中價位）與策略價位（v2 規則價）是兩回事，本頁分開標示。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>數據來源：收盤價與損益結算（11-04）、各原看板期權快照（期權截至 11-03，OptiView／FlashAlpha，OPRA 延遲數據）；即時行情 CNBC 主源、TradingView 備援。九個原看板站繼續運行，各面板附連結。</p>
+  <p>附註：NVDA、AVGO 收盤採 Nasdaq 官方收盤，與各站頁面讀數差 $0.11／$0.15，屬來源口徑差異，不影響信號結論。</p>
+  <p>僅供研究參考，不構成投資建議。</p>
+</footer>
+
+</div>
+
+<script>
+var STOCKS = [
+ {sym:"SPCX", name:"SpaceX（未上市持股對應）", close:135.92, chg:-3.81,
+  plain:"跌破抬高後的 $140 地板，天花板在 $150。做市商仍是加速器（追漲殺跌、放大波動），但力道收窄。結論不變：持有不動，盯 $140 能否收復。",
+  hold:"13 股 @ $150.053（成本）",
+  walls:[["天花板（Call Wall）","$150"],["地板（Put Wall）","$140（收盤已跌破）"],["Max Pain","$150"],["淨 GEX","-$24.8M（加速器，力道收窄）"]],
+  wallNote:"期權截至 11-03 快照。",
+  strat:[["盯價","$140（地板）／ $150（天花板）"],["v2 狀態","持有不動"]],
+  extra:"下一事件：12-08 餘下約 7.976 億股解禁。",
+  url:"https://tonytcfu.github.io/spacex-dashboard/", tv:"NASDAQ:SPCX"},
+ {sym:"TEM", name:"Tempus AI", close:75.61, chg:-2.81,
+  plain:"收盤貼近 $75 地板、僅高 $0.61；天花板已由 $100 下移至 $80。做市商是減震器（漲了賣、跌了買，壓住波動）。現為 0 股，繼續追蹤，不涉及續抱倉位。",
+  hold:"0 股（已清倉，繼續追蹤）",
+  walls:[["天花板（Call Wall）","$80（已由 $100 下移）"],["地板（Put Wall）","$75"],["Max Pain","$65"],["淨 GEX","+$14.1M（減震器）"]],
+  wallNote:"期權截至 11-03 快照。",
+  strat:[["盯價","$75（地板）／ $80（天花板）"],["v2 狀態","無持倉，純追蹤"]],
+  extra:"地板僅在下方 $0.61，一旦失守 $75，回吐可能加快，先盯收盤確認。",
+  url:"https://tonytcfu.github.io/tempus-dashboard/", tv:"NASDAQ:TEM"},
+ {sym:"NVDA", name:"NVIDIA", close:200.13, chg:-3.17,
+  plain:"收盤守住 $200 地板，但盤中低點 $199.68 曾跌破——守住不算脫險，要看後續收盤確認。做市商減震器大增厚。A 檔買 1 股信號仍在區間下沿，執行與否由用戶決定。",
+  hold:"8 股 @ $231.836",
+  walls:[["天花板（Call Wall）","$220"],["地板（Put Wall）","$200"],["Max Pain","$200"],["淨 GEX","+$896.4M（減震器，大增厚）"]],
+  wallNote:"期權截至 11-03 快照，FlashAlpha Gamma 口徑。",
+  strat:[["A 檔區間","$200 – $206（信號仍在下沿，買 1 股，待用戶決定）"],["盯價","$200（地板）／ $220（天花板）"],["財報","11-17 盤後 Q3"]],
+  extra:"牆位與策略價分開看：地板 $200 是期權持倉集中位，A 檔 $200–$206 是 v2 買入區，兩者鄰近、不是同一個數。收盤採 Nasdaq 官方收盤（見頁尾附註）。",
+  url:"https://tonytcfu.github.io/nvda-dashboard/", tv:"NASDAQ:NVDA"},
+ {sym:"MU", name:"Micron", close:795.23, chg:-7.00,
+  plain:"跌破 $800 地板，屬板塊拋售延續，未見公司爆雷。v2 兜底 $788 未破（收盤高 $7.23）；舊體系 $816 參考線雖已跌破，但在 v2 下不觸發賣出，不是賣出信號。",
+  hold:"1 股 @ $1,090.80",
+  walls:[["天花板（Call Wall）","$900"],["地板（Put Wall）","$800（收盤已跌破）"],["Max Pain","$850"],["淨 GEX","+$173.4M（11-03 快照翻正）"]],
+  wallNote:"期權截至 11-03 快照。淨 GEX 翻正是拍於 11-04 大跌之前的快照，不能據此斷言 11-04 當天的對沖狀態。",
+  strat:[["盯價","$800（地板）／ $900（天花板）"],["v2 兜底","$788（未破，高 $7.23）"],["舊體系參考線","$816 已破，v2 下不觸發賣出"]],
+  extra:"11-06 桃園第三次協商只做靜默檢查，無公開進展不展開。",
+  url:"https://tonytcfu.github.io/micron-dashboard/", tv:"NASDAQ:MU"},
+ {sym:"LRCX", name:"Lam Research", close:221.43, chg:-4.03,
+  plain:"牆位已經重畫：天花板由 $260 下移至 $240、地板由 $220 上移至 $230，收盤已跌破新地板 $230——舊 $220 不再是現行地板。做市商仍是加速器。觀察倉在熱度壓回前凍結：不動作、不抄底。",
+  hold:"0 股（觀察倉）",
+  walls:[["天花板（Call Wall）","$240（已由 $260 下移）"],["地板（Put Wall）","$230（已由 $220 上移，收盤已跌破）"],["更深持倉量地板","$180"],["Max Pain","$250"],["淨 GEX","-$28.7M（加速器）"]],
+  wallNote:"期權截至 11-03 快照，牆位已重畫，以新牆為準。",
+  strat:[["盯價","$230（新地板）／ $240（天花板）"],["v2 狀態","觀察倉凍結，熱度壓回前不動作"]],
+  extra:"加速器體制加上地板已破，下行容易自我強化；未見公司新公告，不據此改判。",
+  url:"https://tonytcfu.github.io/lam-research-dashboard/", tv:"NASDAQ:LRCX"},
+ {sym:"AVGO", name:"Broadcom", close:325.48, chg:-2.00,
+  plain:"收盤在 $300–$350 區間中部。雖然落在 A 檔 $318–$330 區內，但按 11-01 深分析定論本週順延，不發買入信號，先盯著。做市商仍是加速器。",
+  hold:"3 股 @ $353.547",
+  walls:[["天花板（Call Wall）","$350"],["地板（Put Wall）","$300"],["Max Pain","$350"],["淨 GEX","-$69.5M（加速器）"]],
+  wallNote:"期權截至 11-03 快照。",
+  strat:[["A 檔區間","$318 – $330（本週順延，不發買入信號）"],["盯價","$350（天花板）／ $300（地板）"],["財報","12-09 盤後"]],
+  extra:"收盤採 Nasdaq 官方收盤（見頁尾附註）。",
+  url:"https://tonytcfu.github.io/broadcom-dashboard/", tv:"NASDAQ:AVGO"},
+ {sym:"ETN", name:"Eaton", close:353.08, chg:-9.86,
+  plain:"大跌 9.86%，跌破 $370 地板，收盤亦跌破 v2 兜底 $358。但快掃未見公司級利空——11-03 財報才剛創紀錄、全年指引年內第三次上調，跌勢偏板塊衝擊：按 v2 不賣，改列 A 檔候選。持倉 2 股成本 $435.03，仍未解套。",
+  hold:"2 股 @ $435.03",
+  walls:[["天花板（Call Wall）","$398"],["地板（Put Wall）","$370（收盤已跌破）"],["Max Pain","$397.5"],["淨 GEX","+$71.4M（減震器，但壓不住板塊衝擊）"]],
+  wallNote:"期權截至 11-03 快照。",
+  strat:[["盯價","$370（地板）／ $398（天花板）"],["v2 兜底","$358 已跌破，但無公司級利空 → 不賣，改列 A 檔候選"],["v2 狀態","持有，A 檔候選"]],
+  extra:"減震器墊子雖增厚，仍壓不住板塊級拋售；後續以收盤能否站回 $370 與 $358 上方判斷修復。",
+  url:"https://tonytcfu.github.io/eaton-dashboard/", tv:"NYSE:ETN"},
+ {sym:"HOOD", name:"Robinhood", close:87.41, chg:2.02,
+  plain:"九隻中唯一收漲。但規則 B 全出 5 股已在 11-02 收盤確認成立，11-03、11-04 連續收回 $85 不取消已成立的觸發；持倉仍按 5 股計，不得預設已賣出。盯 $80／$100 僅作事後對照。",
+  hold:"5 股 @ $111.52（規則 B 全出已確認，待執行回報）",
+  walls:[["天花板（Call Wall）","$100"],["地板（Put Wall）","$80"],["Max Pain","$93"],["淨 GEX","+$6.6M（減震器，仍弱）"]],
+  wallNote:"期權截至 11-03 快照。",
+  strat:[["規則 B","全出 5 股已於 11-02 收盤確認；收回 $85 不取消觸發"],["盯價","$80 ／ $100（僅作事後對照）"],["v2 狀態","待執行，持倉仍按 5 股計"]],
+  extra:"在用戶回報成交價之前，持倉一律按 5 股計，不預設已賣出。",
+  url:"https://tonytcfu.github.io/robinhood-dashboard/", tv:"NASDAQ:HOOD"},
+ {sym:"TSM", name:"台積電 ADR", close:395.75, chg:-2.24,
+  plain:"跌破 $400 地板，也低於 200 日均線 $400.22，11-03 剛收回的 $400 只守了一天。不加倉，繼續盯 $400 能否收回。",
+  hold:"4 股 @ $417.05",
+  walls:[["Gamma 天花板","$450"],["OI 天花板","$500"],["地板（Put Wall）","$400（收盤已跌破）"],["Max Pain","$410"],["淨 GEX","+$40.1M（FlashAlpha 單源暫定讀數）"]],
+  wallNote:"期權截至 11-03 快照。FlashAlpha 淨 GEX 翻正至 +$40.1M，但該站制度字段空白，只能作單源暫定讀數，未確認減震器接管。",
+  strat:[["盯價","$400（地板）／ $380"],["v2 狀態","不加倉，觀察"]],
+  extra:"下一事件：11-10 前後公布 10 月月度營收，是對照 Q4 指引 US$52.3–54.3B 的首個讀數。",
+  url:"https://tonytcfu.github.io/tsm-dashboard/", tv:"NYSE:TSM"}
+];
+
+var PNL = [
+ ["SPCX","13","$150.053",1766.96],["NVDA","8","$231.836",1601.04],["AVGO","3","$353.547",976.44],
+ ["GEV","1","$928.18",832.83],["MU","1","$1,090.80",795.23],["TSM","4","$417.05",1583.00],
+ ["ETN","2","$435.03",706.16],["HOOD","5","$111.52",437.05],["CRSP","10","$53.786",517.75],
+ ["VRT","2","$201.18",411.10],["AMAT","1","$408.00",369.40],["BEAM","5","$25.716",138.95],
+ ["SKHY","1","$160.90",143.07]
+];
+
+var EVENTS = [
+ ["11-03","ETN Q3 財報超預期（已發生）","盤前發布，財報創紀錄、全年指引年內第三次上調。","已發生"],
+ ["11-03","BEAM Q3 低於預期（已發生）","盤前發布，結果低於預期。","已發生"],
+ ["11-04","中期選舉：民主黨拿下兩院（已發生）","選後市場擔心數據中心審批放緩，AI 硬體與電力股集體被賣，屬政策情緒。","已發生"],
+ ["11-06","MU 桃園第三次協商","僅靜默檢查，無公開進展不展開。","公司"],
+ ["11-10 前後","TSM 10 月月度營收","對照 Q4 指引 US$52.3–54.3B 的首個讀數；年增率連續轉弱才觸發論點檢視。","營收"],
+ ["11-12","AMAT 盤後財報","持倉事件（1 股），事件前出概率卡，事前定動作。","財報"],
+ ["11-17","NVDA 盤後財報","持倉最大事件，事件前出概率卡，事前定動作。","財報"],
+ ["11-18","策略 v2 總覆核＋目標可行性覆核","覆核目標可行性（ON TRACK／NEEDS MORE RISK／GOAL REVISION）與各倉角色（核心／衛星）。","紀律"],
+ ["12-08","SPCX 解禁","餘下約 7.976 億股解禁，盯流通盤擴大後的承接。","解禁"],
+ ["12-09","AVGO 財報","持倉事件，事件前出概率卡。","財報"]
+];
+
+function fmt(n,d){ return n.toLocaleString("en-US",{minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d}); }
+function chgHtml(c){ var cls=c>=0?"up":"down"; var s=(c>=0?"+":"")+c.toFixed(2)+"%"; return '<span class="'+cls+' num">'+s+'</span>'; }
+
+/* mini grid */
+var mini=document.getElementById("miniGrid");
+STOCKS.forEach(function(s,i){
+  var b=document.createElement("button"); b.className="minicard"; b.type="button";
+  b.innerHTML='<span class="t">'+s.sym+'</span><br><span class="p num">$'+fmt(s.close)+'</span> '+chgHtml(s.chg)+'<br><span class="small">11-04 收盤</span>';
+  b.addEventListener("click",function(){ selectTab(i); document.getElementById("tabRow").scrollIntoView({block:"start"}); });
+  mini.appendChild(b);
+});
+
+/* tabs + panels */
+var tabRow=document.getElementById("tabRow"), panels=document.getElementById("panels");
+var labels=STOCKS.map(function(s){return s.sym;}); labels.push("損益表");
+labels.forEach(function(lab,i){
+  var b=document.createElement("button"); b.className="tabbtn"; b.type="button";
+  b.setAttribute("role","tab"); b.id="tab-"+i;
+  if(i<STOCKS.length){ var s=STOCKS[i]; b.innerHTML=lab+'<span class="chg num">'+(s.chg>=0?"+":"")+s.chg.toFixed(2)+'%</span>'; }
+  else b.textContent=lab;
+  b.setAttribute("aria-selected", i===0?"true":"false");
+  b.addEventListener("click",function(){ selectTab(i); });
+  tabRow.appendChild(b);
+});
+function selectTab(i){
+  var btns=tabRow.children, ps=panels.children;
+  for(var k=0;k<btns.length;k++){ btns[k].setAttribute("aria-selected", k===i?"true":"false"); ps[k].classList.toggle("active", k===i); }
+}
+STOCKS.forEach(function(s,i){
+  var sec=document.createElement("section"); sec.className="panel"+(i===0?" active":"");
+  sec.setAttribute("role","tabpanel");
+  var walls=s.walls.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v num">'+w[1]+'</span></div>';}).join("");
+  var strat=s.strat.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v">'+w[1]+'</span></div>';}).join("");
+  sec.innerHTML=
+   '<div class="p-head"><span class="name">'+s.sym+'</span><span class="full">'+s.name+'</span><span class="badge">11-04 正式收盤</span></div>'
+   +'<div class="pricebox"><span class="bigprice num">$'+fmt(s.close)+'</span><span class="bigchg">'+chgHtml(s.chg)+'</span>'
+   +'<span class="small">持倉：'+s.hold+'</span></div>'
+   +'<p class="plain">'+s.plain+'</p>'
+   +'<div class="grid2">'
+   +'<div class="box"><h3>期權牆位（期權截至 11-03）</h3>'+walls+'<p class="small" style="margin-top:8px">'+s.wallNote+'</p></div>'
+   +'<div class="box"><h3>策略價位與 v2 狀態</h3>'+strat+'</div>'
+   +'</div>'
+   +'<p style="margin-top:14px">'+s.extra+'</p>'
+   +'<div class="livebar"><button type="button" class="refresh" data-sym="'+s.sym+'">刷新行情</button>'
+   +'<span class="livestate small">即時行情尚未刷新（上方為 11-04 收盤基準）</span>'
+   +'<span class="liveval num"></span></div>'
+   +'<a class="orig" href="'+s.url+'" target="_blank" rel="noopener">開啟 '+s.sym+' 原看板 →</a>';
+  panels.appendChild(sec);
+});
+
+/* P&L panel */
+(function(){
+  var sec=document.createElement("section"); sec.className="panel"; sec.setAttribute("role","tabpanel");
+  var rows=PNL.map(function(r){
+    return '<tr><td data-label="代碼"><b>'+r[0]+'</b></td><td data-label="股數" class="num">'+r[1]+'</td><td data-label="成本" class="num">'+r[2]+'</td><td data-label="市值（11-04 收盤）" class="num">$'+fmt(r[3])+'</td></tr>';
+  }).join("");
+  sec.innerHTML=
+   '<div class="p-head"><span class="name">損益表</span><span class="full">同一個帳戶・11-04 收盤結算</span></div>'
+   +'<p class="plain">這就是上面九站持倉所屬的同一個帳戶：13 隻持倉（市值 <span class="num">$10,278.98</span>）、現金 <span class="num">$2,788.53</span>，帳戶總值 <span class="num">$13,067.51</span>。TEM 已清倉、不在持倉內（繼續追蹤）；HOOD 規則 B 全出已確認但尚未執行回報，仍按 5 股計入。</p>'
+   +'<table class="stack"><thead><tr><th>代碼</th><th>股數</th><th>成本</th><th>市值（11-04 收盤）</th></tr></thead><tbody>'
+   +rows
+   +'<tr><td data-label="代碼">現金</td><td data-label="股數">—</td><td data-label="成本">—</td><td data-label="市值（11-04 收盤）" class="num">$2,788.53</td></tr>'
+   +'</tbody><tfoot><tr><td>帳戶總值</td><td></td><td></td><td class="num">$13,067.51</td></tr></tfoot></table>'
+   +'<div class="grid2">'
+   +'<div class="box"><h3>損益結算</h3>'
+   +'<div class="kv"><span class="k">本金</span><span class="v num">$14,693.28</span></div>'
+   +'<div class="kv"><span class="k">持倉市值</span><span class="v num">$10,278.98</span></div>'
+   +'<div class="kv"><span class="k">現金</span><span class="v num">$2,788.53</span></div>'
+   +'<div class="kv"><span class="k">累計損益</span><span class="v num neg">-$1,625.77（-11.06%）</span></div></div>'
+   +'<div class="box"><h3>目標口徑（同一帳戶）</h3>'
+   +'<div class="kv"><span class="k">目標總值</span><span class="v num">$11,300.55</span></div>'
+   +'<div class="kv"><span class="k">算法</span><span class="v">帳戶總值 − SPCX 市值</span></div>'
+   +'<div class="kv"><span class="k">距目標 $13,843.33</span><span class="v num">還需 +$2,542.78（+22.50%）</span></div>'
+   +'<div class="kv"><span class="k">剩餘時間</span><span class="v">62 天（已走完 30／92 天，至 2027-01-06）</span></div>'
+   +'<p class="small" style="margin-top:8px">10-06 基線定義不含 SPCX，所以目標口徑把 SPCX 市值扣除；這是同一帳戶的兩種算法，不是兩個帳戶。</p></div>'
+   +'</div>';
+  panels.appendChild(sec);
+})();
+
+/* events */
+var evBox=document.getElementById("events");
+EVENTS.forEach(function(e){
+  var d=document.createElement("div"); d.className="ev";
+  d.innerHTML='<span class="d num">'+e[0]+'</span><div><b>'+e[1]+'</b><span class="badge tag">'+e[3]+'</span><br><span class="small">'+e[2]+'</span></div>';
+  evBox.appendChild(d);
+});
+
+/* live quotes: CNBC primary, TradingView fallback */
+function numOf(x){ if(typeof x==="number")return x; if(typeof x==="string"){var n=parseFloat(x.replace(/[$,\s%+]/g,""));return isNaN(n)?NaN:n;} return NaN; }
+function fetchJson(url,ms){
+  var ctrl=new AbortController(); var t=setTimeout(function(){ctrl.abort();},ms||9000);
+  return fetch(url,{cache:"no-store",signal:ctrl.signal}).then(function(r){ clearTimeout(t); if(!r.ok)throw new Error("HTTP "+r.status); return r.json(); })
+   .catch(function(e){ clearTimeout(t); throw e; });
+}
+function loadCnbc(sym){
+  var url="https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols="+encodeURIComponent(sym)+"&requestMethod=itv&noform=1&partnerId=2&fund=1&exthrs=1&output=json";
+  return fetchJson(url,9000).then(function(p){
+    var q=p&&p.FormattedQuoteResult&&p.FormattedQuoteResult.FormattedQuote&&p.FormattedQuoteResult.FormattedQuote[0];
+    if(!q||Number(q.code)!==0)throw new Error("cnbc");
+    var price=numOf(q.last), pct=numOf(q.change_pct);
+    if(isNaN(price))throw new Error("cnbc");
+    return {price:price,pct:pct,src:"CNBC"};
+  });
+}
+function loadTV(s){
+  var url="https://scanner.tradingview.com/symbol?symbol="+encodeURIComponent(s.tv)+"&fields=close%2Cchange";
+  return fetchJson(url,9000).then(function(p){
+    if(!p||typeof p.close!=="number")throw new Error("tv");
+    return {price:p.close,pct:p.change,src:"TradingView"};
+  });
+}
+document.addEventListener("click",function(ev){
+  var btn=ev.target.closest?ev.target.closest("button.refresh"):null; if(!btn)return;
+  var sym=btn.getAttribute("data-sym");
+  var s=null; STOCKS.forEach(function(x){ if(x.sym===sym)s=x; }); if(!s)return;
+  var bar=btn.parentNode, state=bar.querySelector(".livestate"), val=bar.querySelector(".liveval");
+  btn.disabled=true; state.textContent="抓取中…"; val.textContent="";
+  loadCnbc(sym).catch(function(){ return loadTV(s); }).then(function(q){
+    var pctTxt=isNaN(q.pct)?"":("（"+(q.pct>=0?"+":"")+Number(q.pct).toFixed(2)+"%）");
+    val.innerHTML="即時 $"+fmt(q.price)+pctTxt;
+    val.className="liveval num "+(q.pct>=0?"up":"down");
+    state.textContent="來源："+q.src+"・剛剛刷新（與 11-04 收盤基準分開顯示）";
+  }).catch(function(){
+    val.textContent=""; state.textContent="獲取失敗，點擊重試";
+  }).then(function(){ btn.disabled=false; });
+});
+</script>
+</body>
+</html>
