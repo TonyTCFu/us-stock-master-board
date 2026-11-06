@@ -4,8 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
-<link rel="icon" type="image/png" href="favicon.png" />
-<link rel="apple-touch-icon" href="favicon.png" />
+<link rel="icon" href="data:," />
 <title>美股總看板</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -133,17 +132,17 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 <p class="small">九個個股看板合併一頁，標籤切換；損益表為同一個帳戶的完整持倉。</p>
 
 <div class="fresh">
-  <b>時效：</b>股價與漲跌幅為 <b>2026-11-04 正式收盤</b>（美東）；期權牆位與 Max Pain 為 <b>11-03 快照（期權截至 11-03）</b>，口徑逐檔標明；損益按 11-04 收盤結算。本頁更新於 2026-11-05。即時行情請按各面板的「刷新行情」，與收盤基準分開顯示，不混用。
+  <b>時效：</b>股價與漲跌幅為 <b>2026-11-05 正式收盤</b>（美東）；期權牆位與 Max Pain 為 <b>11-04 快照（期權截至 11-04）</b>，口徑逐檔標明；損益按 11-05 收盤結算。本頁更新於 2026-11-06。即時行情請按各面板的「刷新行情」，與收盤基準分開顯示，不混用。
 </div>
 
-<h2>總覽（11-04 收盤）</h2>
-<p class="lede">「大盤漲、AI 硬體跌」的分化日：道指 <b>+3.03%</b>、標普 <b>+1.58%</b>、納指 <b>+1.44%</b>，費城半導體指數約 <b>-3.3%</b>；九站 <b>1 漲 8 跌</b>，只有 HOOD（+2.02%）收漲，ETN 跌 9.86% 最深、MU 跌 7.00%。主因是中期選舉後市場擔心數據中心審批放緩——這是政策情緒，不是九隻當天都出了公司利空。HOOD 規則 B 全出 5 股已於 11-02 收盤確認成立，11-03、11-04 連續收回 $85 不取消觸發，持倉仍按 5 股計、未預設已賣出。</p>
+<h2>總覽（11-05 收盤）</h2>
+<p class="lede">歷史級暴跌日：標普 500 <b>-4.36%</b>、納指 <b>-5.52%</b> 跌入修正區間（較 10 月 6 日紀錄高點跌逾 10%）、費城半導體指數 <b>-12.25%</b>（2020 年 3 月以來最差單日）；九隻追蹤股<b>全跌</b>，MU 跌 17.46% 最深、LRCX 跌 16.51%。主因：中期選舉後數據中心暫停令擔憂（出口民調約 76% 選民反對在社區附近新建數據中心）＋高通財報手機晶片收入年減 26%＋AI 融資鏈擔憂再起。HOOD 規則 B 全出 5 股已於 11-02 收盤確認成立，持倉仍按 5 股計、未預設已賣出。</p>
 
 <div class="stats">
-  <div class="stat"><div class="k">帳戶總值（含 SPCX）</div><div class="v num">$13,067.51</div><div class="s">現金 $2,788.53 ＋ 持倉市值 $10,278.98</div></div>
-  <div class="stat"><div class="k">累計損益（本金 $14,693.28）</div><div class="v num down">-$1,625.77</div><div class="s">-11.06%（按 11-04 收盤結算）</div></div>
-  <div class="stat"><div class="k">目標總值（不含 SPCX）</div><div class="v num">$11,300.55</div><div class="s">目標 $13,843.33（2027-01-06 前 +5%）</div></div>
-  <div class="stat"><div class="k">距目標</div><div class="v num">還需 +$2,542.78</div><div class="s">+22.50%，已走完 30／92 天、剩餘 62 天｜熱度 $380.96（3.37%，上限 6%）</div></div>
+  <div class="stat"><div class="k">帳戶總值（含 SPCX）</div><div class="v num">$12,019.83</div><div class="s">現金 $2,788.53 ＋ 持倉市值 $9,231.30</div></div>
+  <div class="stat"><div class="k">累計損益（本金 $14,693.28）</div><div class="v num down">-$2,673.45</div><div class="s">-18.20%（按 11-05 收盤結算）</div></div>
+  <div class="stat"><div class="k">目標總值（不含 SPCX）</div><div class="v num">$10,412.77</div><div class="s">目標 $13,843.33（2027-01-06 前 +5%）</div></div>
+  <div class="stat"><div class="k">距目標</div><div class="v num">還需 +$3,430.56</div><div class="s">+32.95%，已走完 31／92 天、剩餘 61 天｜熱度 $74.35（0.71%，上限 6%）</div></div>
 </div>
 
 <div class="mini" id="miniGrid" aria-label="九站收盤速覽"></div>
@@ -164,9 +163,9 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
     <h3>倉位與風險</h3>
     <ul>
       <li><b>核心／衛星雙軌：</b>核心倉長期持有、衛星倉按訊號進出，兩軌不混算。</li>
-      <li><b>熱度上限：</b>1R ＝ 總值 1%；總熱度上限 6%，目前 <span class="num">$380.96（3.37%）</span>，在上限內。</li>
-      <li><b>節流閥：</b>未觸發（距一檔線 <span class="num">$11,257.28</span> 僅 <span class="num">$43.27</span>）。</li>
-      <li><b>目標：</b><span class="num">$13,843.33</span>（基線 <span class="num">$13,184.12</span>，2026-10-06 起算，2027-01-06 前達 +5%）；進度已走完 30／92 天、剩 62 天；11-18 做 v2 首次總覆核＋目標可行性覆核。</li>
+      <li><b>熱度上限：</b>1R ＝ 總值 1%；總熱度上限 6%，目前 <span class="num">$74.35（0.71%）</span>，在上限內。</li>
+      <li><b>節流閥：</b>二檔已觸發（總值 <span class="num">$10,412.77</span> 已低於二檔線 <span class="num">$10,664.79</span>，風險減半＋凍結新開倉）。</li>
+      <li><b>目標：</b><span class="num">$13,843.33</span>（基線 <span class="num">$13,184.12</span>，2026-10-06 起算，2027-01-06 前達 +5%）；進度已走完 31／92 天、剩 61 天；11-18 做 v2 首次總覆核＋目標可行性覆核。</li>
     </ul>
   </div>
   <div class="box">
@@ -197,8 +196,8 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 </div>
 
 <footer>
-  <p>數據來源：收盤價與損益結算（11-04）、各原看板期權快照（期權截至 11-03，OptiView／FlashAlpha，OPRA 延遲數據）；即時行情 CNBC 主源、TradingView 備援。九個原看板站繼續運行，各面板附連結。</p>
-  <p>附註：NVDA、AVGO 收盤採 Nasdaq 官方收盤，與各站頁面讀數差 $0.11／$0.15，屬來源口徑差異，不影響信號結論。</p>
+  <p>數據來源：收盤價與損益結算（11-05）、各原看板期權快照（期權截至 11-04，OptiView／FlashAlpha，OPRA 延遲數據）；即時行情 CNBC 主源、TradingView 備援。九個原看板站繼續運行，各面板附連結。</p>
+  <p>附註：各股收盤為 CNBC 16:00 EST 正式收盤，Finnhub 交叉核對；AVGO 收盤採帳本值 $291.53。</p>
   <p>僅供研究參考，不構成投資建議。</p>
 </footer>
 
@@ -206,93 +205,95 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 
 <script>
 var STOCKS = [
- {sym:"SPCX", name:"SpaceX（未上市持股對應）", close:135.92, chg:-3.81,
-  plain:"跌破抬高後的 $140 地板，天花板在 $150。做市商仍是加速器（追漲殺跌、放大波動），但力道收窄。結論不變：持有不動，盯 $140 能否收復。",
+ {sym:"SPCX", name:"SpaceX（未上市持股對應）", close:123.62, chg:-9.05,
+  plain:"歷史級暴跌日跟跌逾 9%，收盤跌破 $135 地板（Gamma 口徑）。做市商是加速器（追漲殺跌、放大波動），而且力道大幅加深。結論不變：持有不動，盯 $135 能否收復與 $120（最大未平倉 Put 牆）。",
   hold:"13 股 @ $150.053（成本）",
-  walls:[["天花板（Call Wall）","$150"],["地板（Put Wall）","$140（收盤已跌破）"],["Max Pain","$150"],["淨 GEX","-$24.8M（加速器，力道收窄）"]],
-  wallNote:"期權截至 11-03 快照。",
-  strat:[["盯價","$140（地板）／ $150（天花板）"],["v2 狀態","持有不動"]],
+  walls:[["天花板（Call Wall）","$150"],["地板（Put Wall，Gamma 口徑）","$135（收盤已跌破）"],["最大未平倉 Put 牆","$120"],["Max Pain","$150"],["淨 GEX","-$132.6M（加速器，力道大幅加深）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["盯價","$135（地板）／ $120（最大未平倉 Put 牆）"],["v2 狀態","持有不動"]],
   extra:"下一事件：12-08 餘下約 7.976 億股解禁。",
   url:"https://tonytcfu.github.io/spacex-dashboard/", tv:"NASDAQ:SPCX"},
- {sym:"TEM", name:"Tempus AI", close:75.61, chg:-2.81,
-  plain:"收盤貼近 $75 地板、僅高 $0.61；天花板已由 $100 下移至 $80。做市商是減震器（漲了賣、跌了買，壓住波動）。現為 0 股，繼續追蹤，不涉及續抱倉位。",
+ {sym:"TEM", name:"Tempus AI", close:70.43, chg:-6.85,
+  plain:"收盤跌破 $75 地板 6.09%。做市商仍是減震器（漲了賣、跌了買，壓住波動），但墊子變薄。現為 0 股，繼續追蹤，不涉及續抱倉位；盯 $75 與 $65。",
   hold:"0 股（已清倉，繼續追蹤）",
-  walls:[["天花板（Call Wall）","$80（已由 $100 下移）"],["地板（Put Wall）","$75"],["Max Pain","$65"],["淨 GEX","+$14.1M（減震器）"]],
-  wallNote:"期權截至 11-03 快照。",
-  strat:[["盯價","$75（地板）／ $80（天花板）"],["v2 狀態","無持倉，純追蹤"]],
-  extra:"地板僅在下方 $0.61，一旦失守 $75，回吐可能加快，先盯收盤確認。",
+  walls:[["天花板（Call Wall）","$80"],["地板（Put Wall）","$75（收盤已跌破）"],["Max Pain","$65"],["淨 GEX","+$12.7M（減震器，墊子變薄）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["盯價","$75（地板）／ $65（Max Pain）"],["v2 狀態","無持倉，純追蹤"]],
+  extra:"11-02 已發布 Q3 財報；地板 $75 已破，先盯收盤能否站回。",
   url:"https://tonytcfu.github.io/tempus-dashboard/", tv:"NASDAQ:TEM"},
- {sym:"NVDA", name:"NVIDIA", close:200.13, chg:-3.17,
-  plain:"收盤守住 $200 地板，但盤中低點 $199.68 曾跌破——守住不算脫險，要看後續收盤確認。做市商減震器大增厚。A 檔買 1 股信號仍在區間下沿，執行與否由用戶決定。",
+ {sym:"NVDA", name:"NVIDIA", close:181.60, chg:-9.26,
+  plain:"首次收盤跌破 $200 地板（Put Wall）。做市商仍是減震器（漲了賣、跌了買，壓住波動），但墊子大減。先前 $200–$206 的 A 檔買入信號已作廢，不追跌接刀；盯 $200 與 $180。",
   hold:"8 股 @ $231.836",
-  walls:[["天花板（Call Wall）","$220"],["地板（Put Wall）","$200"],["Max Pain","$200"],["淨 GEX","+$896.4M（減震器，大增厚）"]],
-  wallNote:"期權截至 11-03 快照，FlashAlpha Gamma 口徑。",
-  strat:[["A 檔區間","$200 – $206（信號仍在下沿，買 1 股，待用戶決定）"],["盯價","$200（地板）／ $220（天花板）"],["財報","11-17 盤後 Q3"]],
-  extra:"牆位與策略價分開看：地板 $200 是期權持倉集中位，A 檔 $200–$206 是 v2 買入區，兩者鄰近、不是同一個數。收盤採 Nasdaq 官方收盤（見頁尾附註）。",
+  walls:[["天花板（Call Wall）","$210"],["地板（Put Wall）","$200（首次收盤跌破）"],["Max Pain","$200"],["淨 GEX","+$157.9M（減震器，墊子大減）"]],
+  wallNote:"期權截至 11-04 快照，FlashAlpha Gamma 口徑。",
+  strat:[["A 檔區間","$200 – $206（買入信號已作廢）"],["盯價","$200（地板）／ $180"],["財報","11-17 盤後 Q3"]],
+  extra:"牆位與策略價分開看：地板 $200 是期權持倉集中位，原 A 檔 $200–$206 是 v2 買入區；收盤已跌出區間，信號作廢。",
   url:"https://tonytcfu.github.io/nvda-dashboard/", tv:"NASDAQ:NVDA"},
- {sym:"MU", name:"Micron", close:795.23, chg:-7.00,
-  plain:"跌破 $800 地板，屬板塊拋售延續，未見公司爆雷。v2 兜底 $788 未破（收盤高 $7.23）；舊體系 $816 參考線雖已跌破，但在 v2 下不觸發賣出，不是賣出信號。",
+ {sym:"MU", name:"Micron", close:656.39, chg:-17.46,
+  plain:"九隻中跌最深，兩道地板（$800 未平倉量口徑、$750 Gamma 口徑）全破，也跌破 200 日均線。做市商翻回加速器（追漲殺跌、放大波動）。屬板塊拋售延續，未見公司爆雷；盯 $750／$800 與 $900。",
   hold:"1 股 @ $1,090.80",
-  walls:[["天花板（Call Wall）","$900"],["地板（Put Wall）","$800（收盤已跌破）"],["Max Pain","$850"],["淨 GEX","+$173.4M（11-03 快照翻正）"]],
-  wallNote:"期權截至 11-03 快照。淨 GEX 翻正是拍於 11-04 大跌之前的快照，不能據此斷言 11-04 當天的對沖狀態。",
-  strat:[["盯價","$800（地板）／ $900（天花板）"],["v2 兜底","$788（未破，高 $7.23）"],["舊體系參考線","$816 已破，v2 下不觸發賣出"]],
-  extra:"11-06 桃園第三次協商只做靜默檢查，無公開進展不展開。",
+  walls:[["天花板（Call Wall）","$900"],["地板（Put Wall，未平倉量口徑）","$800（收盤已跌破）"],["地板（Put Wall，Gamma 口徑）","$750（收盤已跌破）"],["Max Pain","$850"],["淨 GEX","-$228.5M（加速器，已翻負）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["盯價","$750／$800（地板）／ $900（天花板）"],["v2 兜底","$788（收盤已跌破）"]],
+  extra:"11-06 桃園勞資第三次協商，結果待公布，僅靜默檢查，無公開進展不展開。",
   url:"https://tonytcfu.github.io/micron-dashboard/", tv:"NASDAQ:MU"},
- {sym:"LRCX", name:"Lam Research", close:221.43, chg:-4.03,
-  plain:"牆位已經重畫：天花板由 $260 下移至 $240、地板由 $220 上移至 $230，收盤已跌破新地板 $230——舊 $220 不再是現行地板。做市商仍是加速器。觀察倉在熱度壓回前凍結：不動作、不抄底。",
+ {sym:"LRCX", name:"Lam Research", close:184.88, chg:-16.51,
+  plain:"收盤跌破 $210 地板（Gamma 口徑），僅守在 $180（未平倉量口徑）上方。做市商仍是加速器且更負。觀察倉在熱度壓回前凍結：不動作、不抄底；盯 $180 與 $210。",
   hold:"0 股（觀察倉）",
-  walls:[["天花板（Call Wall）","$240（已由 $260 下移）"],["地板（Put Wall）","$230（已由 $220 上移，收盤已跌破）"],["更深持倉量地板","$180"],["Max Pain","$250"],["淨 GEX","-$28.7M（加速器）"]],
-  wallNote:"期權截至 11-03 快照，牆位已重畫，以新牆為準。",
-  strat:[["盯價","$230（新地板）／ $240（天花板）"],["v2 狀態","觀察倉凍結，熱度壓回前不動作"]],
-  extra:"加速器體制加上地板已破，下行容易自我強化；未見公司新公告，不據此改判。",
+  walls:[["天花板（Call Wall）","$240"],["地板（Put Wall，Gamma 口徑）","$210（收盤已跌破）"],["地板（Put Wall，未平倉量口徑）","$180"],["Max Pain","$250"],["淨 GEX","-$33.5M（加速器，更負）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["盯價","$180（地板）／ $210（Gamma 地板）"],["v2 狀態","觀察倉凍結，熱度壓回前不動作"]],
+  extra:"加速器體制加上 $210 地板已破，下行容易自我強化；未見公司新公告，不據此改判。",
   url:"https://tonytcfu.github.io/lam-research-dashboard/", tv:"NASDAQ:LRCX"},
- {sym:"AVGO", name:"Broadcom", close:325.48, chg:-2.00,
-  plain:"收盤在 $300–$350 區間中部。雖然落在 A 檔 $318–$330 區內，但按 11-01 深分析定論本週順延，不發買入信號，先盯著。做市商仍是加速器。",
+ {sym:"AVGO", name:"Broadcom", close:291.53, chg:-10.43,
+  plain:"收盤跌破 $300 地板——地板首次失守。做市商仍是加速器且加重。A 檔本週順延、不發買入信號的定論不變，先盯 $300 能否收復與 $350 天花板。",
   hold:"3 股 @ $353.547",
-  walls:[["天花板（Call Wall）","$350"],["地板（Put Wall）","$300"],["Max Pain","$350"],["淨 GEX","-$69.5M（加速器）"]],
-  wallNote:"期權截至 11-03 快照。",
-  strat:[["A 檔區間","$318 – $330（本週順延，不發買入信號）"],["盯價","$350（天花板）／ $300（地板）"],["財報","12-09 盤後"]],
-  extra:"收盤採 Nasdaq 官方收盤（見頁尾附註）。",
+  walls:[["天花板（Call Wall）","$350"],["地板（Put Wall）","$300（首次失守）"],["Max Pain","$350"],["淨 GEX","-$129.8M（加速器，加重）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["A 檔區間","$318 – $330（本週順延，不發買入信號）"],["盯價","$300（地板）／ $350（天花板）"],["財報","12-09 盤後"]],
+  extra:"收盤採帳本值 $291.53（見頁尾附註）。",
   url:"https://tonytcfu.github.io/broadcom-dashboard/", tv:"NASDAQ:AVGO"},
- {sym:"ETN", name:"Eaton", close:353.08, chg:-9.86,
-  plain:"大跌 9.86%，跌破 $370 地板，收盤亦跌破 v2 兜底 $358。但快掃未見公司級利空——11-03 財報才剛創紀錄、全年指引年內第三次上調，跌勢偏板塊衝擊：按 v2 不賣，改列 A 檔候選。持倉 2 股成本 $435.03，仍未解套。",
+ {sym:"ETN", name:"Eaton", close:327.02, chg:-7.38,
+  plain:"再跌 7.38%，收盤跌破 $370 地板與 $340 Gamma 地板。做市商由減震器翻為加速器。但快掃仍未見公司級利空——11-03 財報創紀錄（營收 $8.947B、調整後 EPS $3.68）、全年指引年內第三次上調，跌勢偏板塊衝擊：按 v2 不賣，列 A 檔候選。盯 $340 與 $370。",
   hold:"2 股 @ $435.03",
-  walls:[["天花板（Call Wall）","$398"],["地板（Put Wall）","$370（收盤已跌破）"],["Max Pain","$397.5"],["淨 GEX","+$71.4M（減震器，但壓不住板塊衝擊）"]],
-  wallNote:"期權截至 11-03 快照。",
-  strat:[["盯價","$370（地板）／ $398（天花板）"],["v2 兜底","$358 已跌破，但無公司級利空 → 不賣，改列 A 檔候選"],["v2 狀態","持有，A 檔候選"]],
-  extra:"減震器墊子雖增厚，仍壓不住板塊級拋售；後續以收盤能否站回 $370 與 $358 上方判斷修復。",
+  walls:[["天花板（Call Wall）","$420"],["地板（Put Wall）","$370（收盤已跌破）"],["Gamma 地板","$340（收盤已跌破）"],["Max Pain","$397.5"],["淨 GEX","-$13.7M（加速器，已翻負）"]],
+  wallNote:"期權截至 11-04 快照。",
+  strat:[["盯價","$340（Gamma 地板）／ $370（地板）"],["v2 兜底","$358 已跌破，但無公司級利空 → 不賣，列 A 檔候選"],["v2 狀態","持有，A 檔候選"]],
+  extra:"後續以收盤能否站回 $340 與 $370 判斷修復。",
   url:"https://tonytcfu.github.io/eaton-dashboard/", tv:"NYSE:ETN"},
- {sym:"HOOD", name:"Robinhood", close:87.41, chg:2.02,
-  plain:"九隻中唯一收漲。但規則 B 全出 5 股已在 11-02 收盤確認成立，11-03、11-04 連續收回 $85 不取消已成立的觸發；持倉仍按 5 股計，不得預設已賣出。盯 $80／$100 僅作事後對照。",
+ {sym:"HOOD", name:"Robinhood", close:78.39, chg:-10.32,
+  plain:"收盤跌破 $80 地板。做市商仍是減震器但減震有限。規則 B 全出 5 股已在 11-02 收盤確認成立，觸發不因其後漲跌改寫；持倉仍按 5 股計，待成交回報，不得預設已賣出。盯 $80／$90 僅作事後對照。",
   hold:"5 股 @ $111.52（規則 B 全出已確認，待執行回報）",
-  walls:[["天花板（Call Wall）","$100"],["地板（Put Wall）","$80"],["Max Pain","$93"],["淨 GEX","+$6.6M（減震器，仍弱）"]],
-  wallNote:"期權截至 11-03 快照。",
-  strat:[["規則 B","全出 5 股已於 11-02 收盤確認；收回 $85 不取消觸發"],["盯價","$80 ／ $100（僅作事後對照）"],["v2 狀態","待執行，持倉仍按 5 股計"]],
+  walls:[["天花板（Call Wall）","$90"],["地板（Put Wall）","$80（收盤已跌破）"],["Max Pain","$92"],["淨 GEX","+$16.1M（減震器，減震有限）"]],
+  wallNote:"期權截至 11-04 正式快照；盤後另有 -$7.0M 的非正式快照，不替換正式數據。",
+  strat:[["規則 B","全出 5 股已於 11-02 收盤確認；觸發已成立，待成交回報"],["盯價","$80 ／ $90（僅作事後對照）"],["v2 狀態","待執行，持倉仍按 5 股計"]],
   extra:"在用戶回報成交價之前，持倉一律按 5 股計，不預設已賣出。",
   url:"https://tonytcfu.github.io/robinhood-dashboard/", tv:"NASDAQ:HOOD"},
- {sym:"TSM", name:"台積電 ADR", close:395.75, chg:-2.24,
-  plain:"跌破 $400 地板，也低於 200 日均線 $400.22，11-03 剛收回的 $400 只守了一天。不加倉，繼續盯 $400 能否收回。",
+ {sym:"TSM", name:"台積電 ADR", close:353.10, chg:-10.78,
+  plain:"兩道地板全破：$400（未平倉量口徑）與 $360（Gamma 口徑）都已跌破。做市商是加速器且加深。不加倉，盯 $360 與 $400 能否收復。",
   hold:"4 股 @ $417.05",
-  walls:[["Gamma 天花板","$450"],["OI 天花板","$500"],["地板（Put Wall）","$400（收盤已跌破）"],["Max Pain","$410"],["淨 GEX","+$40.1M（FlashAlpha 單源暫定讀數）"]],
-  wallNote:"期權截至 11-03 快照。FlashAlpha 淨 GEX 翻正至 +$40.1M，但該站制度字段空白，只能作單源暫定讀數，未確認減震器接管。",
-  strat:[["盯價","$400（地板）／ $380"],["v2 狀態","不加倉，觀察"]],
+  walls:[["天花板（Call Wall）","$450"],["地板（Put Wall，未平倉量口徑）","$400（收盤已跌破）"],["地板（Put Wall，Gamma 口徑）","$360（收盤已跌破）"],["Max Pain","$410"],["淨 GEX","-$142.8M（FlashAlpha 單源，加速器加深）"]],
+  wallNote:"期權截至 11-04 快照，淨 GEX 為 FlashAlpha 單源讀數。",
+  strat:[["盯價","$360（Gamma 地板）／ $400（地板）"],["v2 狀態","不加倉，觀察"]],
   extra:"下一事件：11-10 前後公布 10 月月度營收，是對照 Q4 指引 US$52.3–54.3B 的首個讀數。",
   url:"https://tonytcfu.github.io/tsm-dashboard/", tv:"NYSE:TSM"}
 ];
 
 var PNL = [
- ["SPCX","13","$150.053",1766.96],["NVDA","8","$231.836",1601.04],["AVGO","3","$353.547",976.44],
- ["GEV","1","$928.18",832.83],["MU","1","$1,090.80",795.23],["TSM","4","$417.05",1583.00],
- ["ETN","2","$435.03",706.16],["HOOD","5","$111.52",437.05],["CRSP","10","$53.786",517.75],
- ["VRT","2","$201.18",411.10],["AMAT","1","$408.00",369.40],["BEAM","5","$25.716",138.95],
- ["SKHY","1","$160.90",143.07]
+ ["SPCX","13","$150.053",1607.06],["NVDA","8","$231.836",1452.80],["AVGO","3","$353.547",874.59],
+ ["GEV","1","$928.18",770.51],["MU","1","$1,090.80",656.39],["TSM","4","$417.05",1412.40],
+ ["ETN","2","$435.03",654.04],["HOOD","5","$111.52",391.95],["CRSP","10","$53.786",485.60],
+ ["VRT","2","$201.18",353.46],["AMAT","1","$408.00",319.25],["BEAM","5","$25.716",129.35],
+ ["SKHY","1","$160.90",123.90]
 ];
 
 var EVENTS = [
- ["11-03","ETN Q3 財報超預期（已發生）","盤前發布，財報創紀錄、全年指引年內第三次上調。","已發生"],
+ ["11-02","TEM Q3 財報（已發生）","Q3 財報已發布。","已發生"],
+ ["11-03","ETN Q3 財報超預期（已發生）","盤前發布，營收 $8.947B、調整後 EPS $3.68，財報創紀錄、全年指引年內第三次上調。","已發生"],
  ["11-03","BEAM Q3 低於預期（已發生）","盤前發布，結果低於預期。","已發生"],
  ["11-04","中期選舉：民主黨拿下兩院（已發生）","選後市場擔心數據中心審批放緩，AI 硬體與電力股集體被賣，屬政策情緒。","已發生"],
- ["11-06","MU 桃園第三次協商","僅靜默檢查，無公開進展不展開。","公司"],
+ ["11-05","歷史級暴跌日（已發生）","標普 500 -4.36%、納指 -5.52% 跌入修正區間、費城半導體指數 -12.25%（2020 年 3 月以來最差單日）；主因數據中心暫停令擔憂＋高通財報＋AI 融資鏈擔憂再起。","已發生"],
+ ["11-06","MU 桃園勞資第三次協商（今日）","結果待公布，僅靜默檢查，無公開進展不展開。","今日"],
  ["11-10 前後","TSM 10 月月度營收","對照 Q4 指引 US$52.3–54.3B 的首個讀數；年增率連續轉弱才觸發論點檢視。","營收"],
  ["11-12","AMAT 盤後財報","持倉事件（1 股），事件前出概率卡，事前定動作。","財報"],
  ["11-17","NVDA 盤後財報","持倉最大事件，事件前出概率卡，事前定動作。","財報"],
@@ -308,7 +309,7 @@ function chgHtml(c){ var cls=c>=0?"up":"down"; var s=(c>=0?"+":"")+c.toFixed(2)+
 var mini=document.getElementById("miniGrid");
 STOCKS.forEach(function(s,i){
   var b=document.createElement("button"); b.className="minicard"; b.type="button";
-  b.innerHTML='<span class="t">'+s.sym+'</span><br><span class="p num">$'+fmt(s.close)+'</span> '+chgHtml(s.chg)+'<br><span class="small">11-04 收盤</span>';
+  b.innerHTML='<span class="t">'+s.sym+'</span><br><span class="p num">$'+fmt(s.close)+'</span> '+chgHtml(s.chg)+'<br><span class="small">11-05 收盤</span>';
   b.addEventListener("click",function(){ selectTab(i); document.getElementById("tabRow").scrollIntoView({block:"start"}); });
   mini.appendChild(b);
 });
@@ -335,17 +336,17 @@ STOCKS.forEach(function(s,i){
   var walls=s.walls.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v num">'+w[1]+'</span></div>';}).join("");
   var strat=s.strat.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v">'+w[1]+'</span></div>';}).join("");
   sec.innerHTML=
-   '<div class="p-head"><span class="name">'+s.sym+'</span><span class="full">'+s.name+'</span><span class="badge">11-04 正式收盤</span></div>'
+   '<div class="p-head"><span class="name">'+s.sym+'</span><span class="full">'+s.name+'</span><span class="badge">11-05 正式收盤</span></div>'
    +'<div class="pricebox"><span class="bigprice num">$'+fmt(s.close)+'</span><span class="bigchg">'+chgHtml(s.chg)+'</span>'
    +'<span class="small">持倉：'+s.hold+'</span></div>'
    +'<p class="plain">'+s.plain+'</p>'
    +'<div class="grid2">'
-   +'<div class="box"><h3>期權牆位（期權截至 11-03）</h3>'+walls+'<p class="small" style="margin-top:8px">'+s.wallNote+'</p></div>'
+   +'<div class="box"><h3>期權牆位（期權截至 11-04）</h3>'+walls+'<p class="small" style="margin-top:8px">'+s.wallNote+'</p></div>'
    +'<div class="box"><h3>策略價位與 v2 狀態</h3>'+strat+'</div>'
    +'</div>'
    +'<p style="margin-top:14px">'+s.extra+'</p>'
    +'<div class="livebar"><button type="button" class="refresh" data-sym="'+s.sym+'">刷新行情</button>'
-   +'<span class="livestate small">即時行情尚未刷新（上方為 11-04 收盤基準）</span>'
+   +'<span class="livestate small">即時行情尚未刷新（上方為 11-05 收盤基準）</span>'
    +'<span class="liveval num"></span></div>'
    +'<a class="orig" href="'+s.url+'" target="_blank" rel="noopener">開啟 '+s.sym+' 原看板 →</a>';
   panels.appendChild(sec);
@@ -355,26 +356,26 @@ STOCKS.forEach(function(s,i){
 (function(){
   var sec=document.createElement("section"); sec.className="panel"; sec.setAttribute("role","tabpanel");
   var rows=PNL.map(function(r){
-    return '<tr><td data-label="代碼"><b>'+r[0]+'</b></td><td data-label="股數" class="num">'+r[1]+'</td><td data-label="成本" class="num">'+r[2]+'</td><td data-label="市值（11-04 收盤）" class="num">$'+fmt(r[3])+'</td></tr>';
+    return '<tr><td data-label="代碼"><b>'+r[0]+'</b></td><td data-label="股數" class="num">'+r[1]+'</td><td data-label="成本" class="num">'+r[2]+'</td><td data-label="市值（11-05 收盤）" class="num">$'+fmt(r[3])+'</td></tr>';
   }).join("");
   sec.innerHTML=
-   '<div class="p-head"><span class="name">損益表</span><span class="full">同一個帳戶・11-04 收盤結算</span></div>'
-   +'<p class="plain">這就是上面九站持倉所屬的同一個帳戶：13 隻持倉（市值 <span class="num">$10,278.98</span>）、現金 <span class="num">$2,788.53</span>，帳戶總值 <span class="num">$13,067.51</span>。TEM 已清倉、不在持倉內（繼續追蹤）；HOOD 規則 B 全出已確認但尚未執行回報，仍按 5 股計入。</p>'
-   +'<table class="stack"><thead><tr><th>代碼</th><th>股數</th><th>成本</th><th>市值（11-04 收盤）</th></tr></thead><tbody>'
+   '<div class="p-head"><span class="name">損益表</span><span class="full">同一個帳戶・11-05 收盤結算</span></div>'
+   +'<p class="plain">這就是上面九站持倉所屬的同一個帳戶：13 隻持倉（市值 <span class="num">$9,231.30</span>）、現金 <span class="num">$2,788.53</span>，帳戶總值 <span class="num">$12,019.83</span>。TEM 已清倉、不在持倉內（繼續追蹤）；HOOD 規則 B 全出已確認但尚未執行回報，仍按 5 股計入。</p>'
+   +'<table class="stack"><thead><tr><th>代碼</th><th>股數</th><th>成本</th><th>市值（11-05 收盤）</th></tr></thead><tbody>'
    +rows
-   +'<tr><td data-label="代碼">現金</td><td data-label="股數">—</td><td data-label="成本">—</td><td data-label="市值（11-04 收盤）" class="num">$2,788.53</td></tr>'
-   +'</tbody><tfoot><tr><td>帳戶總值</td><td></td><td></td><td class="num">$13,067.51</td></tr></tfoot></table>'
+   +'<tr><td data-label="代碼">現金</td><td data-label="股數">—</td><td data-label="成本">—</td><td data-label="市值（11-05 收盤）" class="num">$2,788.53</td></tr>'
+   +'</tbody><tfoot><tr><td>帳戶總值</td><td></td><td></td><td class="num">$12,019.83</td></tr></tfoot></table>'
    +'<div class="grid2">'
    +'<div class="box"><h3>損益結算</h3>'
    +'<div class="kv"><span class="k">本金</span><span class="v num">$14,693.28</span></div>'
-   +'<div class="kv"><span class="k">持倉市值</span><span class="v num">$10,278.98</span></div>'
+   +'<div class="kv"><span class="k">持倉市值</span><span class="v num">$9,231.30</span></div>'
    +'<div class="kv"><span class="k">現金</span><span class="v num">$2,788.53</span></div>'
-   +'<div class="kv"><span class="k">累計損益</span><span class="v num neg">-$1,625.77（-11.06%）</span></div></div>'
+   +'<div class="kv"><span class="k">累計損益</span><span class="v num neg">-$2,673.45（-18.20%）</span></div></div>'
    +'<div class="box"><h3>目標口徑（同一帳戶）</h3>'
-   +'<div class="kv"><span class="k">目標總值</span><span class="v num">$11,300.55</span></div>'
+   +'<div class="kv"><span class="k">目標總值</span><span class="v num">$10,412.77</span></div>'
    +'<div class="kv"><span class="k">算法</span><span class="v">帳戶總值 − SPCX 市值</span></div>'
-   +'<div class="kv"><span class="k">距目標 $13,843.33</span><span class="v num">還需 +$2,542.78（+22.50%）</span></div>'
-   +'<div class="kv"><span class="k">剩餘時間</span><span class="v">62 天（已走完 30／92 天，至 2027-01-06）</span></div>'
+   +'<div class="kv"><span class="k">距目標 $13,843.33</span><span class="v num">還需 +$3,430.56（+32.95%）</span></div>'
+   +'<div class="kv"><span class="k">剩餘時間</span><span class="v">61 天（已走完 31／92 天，至 2027-01-06）</span></div>'
    +'<p class="small" style="margin-top:8px">10-06 基線定義不含 SPCX，所以目標口徑把 SPCX 市值扣除；這是同一帳戶的兩種算法，不是兩個帳戶。</p></div>'
    +'</div>';
   panels.appendChild(sec);
@@ -422,7 +423,7 @@ document.addEventListener("click",function(ev){
     var pctTxt=isNaN(q.pct)?"":("（"+(q.pct>=0?"+":"")+Number(q.pct).toFixed(2)+"%）");
     val.innerHTML="即時 $"+fmt(q.price)+pctTxt;
     val.className="liveval num "+(q.pct>=0?"up":"down");
-    state.textContent="來源："+q.src+"・剛剛刷新（與 11-04 收盤基準分開顯示）";
+    state.textContent="來源："+q.src+"・剛剛刷新（與 11-05 收盤基準分開顯示）";
   }).catch(function(){
     val.textContent=""; state.textContent="獲取失敗，點擊重試";
   }).then(function(){ btn.disabled=false; });
