@@ -13,7 +13,6 @@
 :root{
   --bg:#f4f1ea; --surface:#fffdf8; --surface2:#ece7db; --ink:#1c1a15; --ink2:#5c564a;
   --line:#d8d0bf; --accent:#0f5c4d; --accent-ink:#ffffff;
-  --up:#b3352b; --down:#1d7a4f; /* 台式習慣之外：美股慣例 綠漲紅跌？ 本頁採國際慣例：漲綠、跌紅，見圖例 */
   --up:#1d7a4f; --down:#b3352b;
   --warn:#9a6206; --warnbg:#fbf0d3; --chip:#e7e1d2;
   --radius:10px;
@@ -47,7 +46,6 @@ p{margin:0 0 10px}
 .stat .v{font-size:21px;font-weight:900}
 .stat .s{font-size:12.5px;color:var(--ink2);white-space:normal}
 .up{color:var(--up)} .down{color:var(--down)}
-/* tabs */
 .tabs{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0 8px;margin-top:14px}
 .tabrow{display:flex;flex-wrap:wrap;gap:8px}
 .tabbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);
@@ -83,26 +81,22 @@ button.refresh{appearance:none;border:none;background:var(--accent);color:var(--
   border-radius:8px;padding:9px 18px;font:inherit;font-weight:700;cursor:pointer}
 button.refresh:disabled{opacity:.55;cursor:wait}
 .liveval{font-weight:700}
-/* overview mini grid */
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
 .minicard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   padding:12px 14px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;width:100%}
 .minicard .t{font-weight:900;font-size:17px}
 .minicard .p{font-size:19px;font-weight:700}
 .minicard:hover{border-color:var(--accent)}
-/* tables */
 table{width:100%;border-collapse:collapse;font-size:14.5px}
 th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
 th:first-child,td:first-child{text-align:left}
 thead th{color:var(--ink2);font-size:12.5px;border-bottom:2px solid var(--ink)}
 tfoot td{font-weight:900;border-top:2px solid var(--ink);border-bottom:none}
 .neg{color:var(--down)} .pos{color:var(--up)}
-/* events */
 .ev{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
 .ev:last-child{border-bottom:none}
 .ev .d{flex:0 0 64px;font-weight:900}
 .ev .tag{margin-left:8px}
-/* discipline */
 .disc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--ink2)}
 @media (max-width:720px){
@@ -111,7 +105,6 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
   .grid2,.disc{grid-template-columns:1fr}
   .mini{grid-template-columns:1fr 1fr}
   h1{font-size:25px}
-  /* wide table -> stacked cards */
   table.stack thead{display:none}
   table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
   table.stack tr{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;padding:8px 6px;background:var(--surface)}
@@ -132,24 +125,24 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 <p class="small">九個個股看板合併一頁，標籤切換；損益表為同一個帳戶的完整持倉。</p>
 
 <div class="fresh">
-  <b>時效：</b>股價與漲跌幅為 <b>2026-11-18 正式收盤</b>（Yahoo／TradingView 15/15 一致交叉核對；StockAnalysis 第三源確認 SPCX $143.50、TSM $362.62）；期權牆位為 <b>11-17 快照（滯後 1 個交易日，逐檔標明；OptiView 未取得處沿用 11-12 或 11-16 舊值並標日期）</b>；損益按 11-18 收盤結算。本頁更新於 <b>2026-11-19</b>。即時行情請按各面板的「刷新行情」，與收盤基準分開顯示，不混用。
+  <b>時效：</b>股價與漲跌幅為 <b>2026-11-19 正式收盤</b>；期權牆位為 <b>11-18 快照（滯後 1 個交易日，逐檔標明）</b>；損益按 11-19 收盤結算。本頁更新於 <b>2026-11-20</b>。即時行情請按各面板的「刷新行情」，與收盤基準分開顯示，不混用。
 </div>
 
-<h2>總覽（11-18 收盤）</h2>
-<p class="lede">大盤分化：標普 500 <b>7,323.63（-0.23%）</b>、納指 <b>24,429.88（+0.42%）</b>、道指 <b>50,198.17（-1.11%）</b>，VIX <b>24.56</b>、10 年期美債收益率 <b>5.07%</b>。</p>
-<p class="lede">NVDA Q3 FY2027 財報大超預期（營收 $115.8B、Q4 指引 $130.0B 高於共識 $125.25B），股價卻反跌 <b>-2.89%</b> 至 $150.96；AVGO 逆勢 <b>+3.64%</b> 至 $354.05，重新站上 $350。</p>
-<p class="lede">信用溫度計未解除：CRWV 2032 債收益率 <b>15.06%</b>（仍高於 15% 困境線）、HY OAS <b>3.43%</b>（as-of 11-17）、CRWV 5 年 CDS <b>974.9 bps</b>（as-of 11-18）。</p>
-<p class="lede">v2 兜底狀態：線下 9 隻——NVDA、TSM、MU、GEV、ETN、HOOD、CRSP、BEAM、AMAT；線上 3 隻——AVGO、VRT、SKHY。線下者基本面未破，按 v2 不賣、改列 A 檔候選。環境記分卡 <b>-4 防守檔</b>（v2.1，2026-11-18 覆核重打），節流閥二檔。</p>
-<p class="lede">NVDA 減半信號已於 <b>2026-11-15 撤回</b>；現 6 股為主動管理後倉位；11/17 財報 Q4 指引高於共識，「低於共識才動籃子」未觸發，持倉不動。衛星時間止損建議待批准（僅反映建議，股數不變）：CRSP 出 10 股、AMAT 出 1 股、VRT 出 2 股，約 $1,131.47 回現金；輪動買腿因防守檔＋節流二檔凍結。</p>
+<h2>總覽（11-19 收盤）</h2>
+<p class="lede">大盤 11-19 普跌：標普 500 <b>7,175.83（-2.02%，六連跌）</b>、納指 <b>23,879.20（-2.25%，進入修正區間）</b>、道指 <b>49,097.06（-2.19%，-1,101.11 點，跌破 50,000）</b>，VIX <b>28.44（+15.80%，高於 11/05 高點 28.15）</b>、10 年期美債收益率約 <b>5.10%（11-18 值）</b>。</p>
+<p class="lede">信用溫度計：CRWV 2032 債收益率 <b>15.25%</b>（11/19，FINRA TRACE，連續第二日站上 15% 困境線；單週 +0.89pp，未逾 1 個百分點閾值）、HY OAS <b>3.47%</b>（as-of 11-18，FRED；一週 +27bps，已逾 20bps 閾值）、CRWV 5 年 CDS 約 <b>1,152 bps</b>（11/10，無新公布）。</p>
+<p class="lede">v2 兜底狀態：線下 11 隻——NVDA、TSM、MU、GEV、ETN、HOOD、CRSP、BEAM、AMAT、VRT、SKHY（VRT 收 $184.99 僅低 $0.01 新破、SKHY 收 $119.20 新破）；線上僅 AVGO。線下者基本面未破，按 v2 不賣、改列 A 檔候選。環境記分卡 <b>-4 防守檔</b>（v2.1，2026-11-18 覆核重打），節流閥二檔。</p>
+<p class="lede">NVDA 11-19 收 $145.98 跌破 $150，觸發 11/12 概率卡情景 C 的基本面核對：Q3 營收 $115.84B（+103%）、EPS $2.68、Q4 指引 $130B 上調，基本面未破裂，下跌主因是治理折價＋宏觀＋情緒，按 v2 不賣，持有 6 股不動。NVDA 減半信號已於 <b>2026-11-15 撤回</b>；現 6 股為主動管理後倉位；11/17 財報 Q4 指引高於共識，「低於共識才動籃子」未觸發，持倉不動。</p>
+<p class="lede">AVGO 11-19 收 $346.65 回落至 $350 下方，11-18 的 B 檔信號（收 $354.05 站上 $350）未站穩，失效。衛星時間止損建議待批准（僅反映建議，股數不變）：CRSP 出 10 股、AMAT 出 1 股、VRT 出 2 股，按 11-19 收盤約 $1,098.21，扣費淨回約 $1,092.45；輪動買腿因防守檔＋節流二檔凍結。</p>
 
 <div class="stats">
-  <div class="stat"><div class="k">帳戶總值（含 SPCX）</div><div class="v num">$12,240.11</div><div class="s">日 +$55.13（11-17 為 $12,184.98）；現金 $1,997.66 ＋ 持倉市值 $10,242.45</div></div>
-  <div class="stat"><div class="k">累計損益（本金 $14,693.28）</div><div class="v num down">-$2,453.17</div><div class="s">-16.70%（按 11-18 收盤結算）；浮動 -$1,944.99；已實現 -$439.62</div></div>
-  <div class="stat"><div class="k">目標總值（不含 SPCX）</div><div class="v num">$10,374.61</div><div class="s">日 +$31.73（＝帳戶總值減 SPCX 市值 $1,865.50）；目標 $13,843.33；基線 $13,184.12</div></div>
-  <div class="stat"><div class="k">距目標</div><div class="v num">還需 +$3,468.72</div><div class="s">+33.44%（以今日總值起算），剩餘 138 天（已走完 44／182 天，至 2027-04-06）｜線性應賺 $159.37、實賺 -$2,809.51、落後 $2,968.88｜熱度 $145.58（1.40%，上限 6%）</div></div>
+  <div class="stat"><div class="k">帳戶總值（含 SPCX）</div><div class="v num">$11,950.93</div><div class="s">日 -$289.18（11-18 為 $12,240.11）；現金 $1,997.66 ＋ 持倉市值 $9,953.27</div></div>
+  <div class="stat"><div class="k">累計損益（本金 $14,693.28）</div><div class="v num down">-$2,742.35</div><div class="s">-18.66%（按 11-19 收盤結算）；浮動 -$2,234.17；已實現 -$439.62</div></div>
+  <div class="stat"><div class="k">目標總值（不含 SPCX）</div><div class="v num">$10,151.34</div><div class="s">日 -$223.27（-2.15%；＝帳戶總值減 SPCX 市值 $1,799.59）；目標 $13,843.33；基線 $13,184.12</div></div>
+  <div class="stat"><div class="k">距目標</div><div class="v num">還需 +$3,691.99</div><div class="s">+36.37%（以今日總值起算），剩餘 137 天（已走完 45／182 天，至 2027-04-06）｜線性應賺 $162.99、實賺 -$3,032.78、落後 $3,195.77｜熱度 $103.95（1.02%，上限 6%）</div></div>
 </div>
 
-<div class="mini"<div class="mini" id="miniGrid" aria-label="九站收盤速覽"></div>
+<div class="mini" id="miniGrid" aria-label="九站收盤速覽"></div>
 
 <div class="tabs">
   <div class="tabrow" role="tablist" aria-label="股票與損益表切換" id="tabRow"></div>
@@ -167,9 +160,9 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
     <h3>倉位與風險</h3>
     <ul>
       <li><b>核心／衛星雙軌：</b>核心倉長期持有、衛星倉按訊號進出，兩軌不混算。</li>
-      <li><b>熱度上限：</b>1R ＝ 總值 1%；總熱度上限 6%，目前 <span class="num">$145.58（1.40%）</span>，在上限內。</li>
+      <li><b>熱度上限：</b>1R ＝ 總值 1%；總熱度上限 6%，目前 <span class="num">$103.95（1.02%）</span>，在上限內。</li>
       <li><b>節流閥：</b>二檔；環境記分卡 -4 防守檔（v2.1，2026-11-18 覆核重打）；衛星輪動買腿凍結。</li>
-      <li><b>目標：</b><span class="num">$13,843.33</span>（基線 <span class="num">$13,184.12</span>，2027-04-06 前達 +5%，182 天窗口）；進度已走完 44／182 天、剩餘 138 天（按發佈日 11-19 計）。</li>
+      <li><b>目標：</b><span class="num">$13,843.33</span>（基線 <span class="num">$13,184.12</span>，2027-04-06 前達 +5%，182 天窗口）；進度已走完 45／182 天、剩餘 137 天。</li>
     </ul>
   </div>
   <div class="box">
@@ -200,8 +193,8 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 </div>
 
 <footer>
-  <p>數據來源：收盤價與損益結算（11-18 正式收盤，Yahoo／TradingView 15/15 一致交叉核對；StockAnalysis 第三源確認 SPCX $143.50、TSM $362.62）、各原看板期權快照（11-17 快照，滯後 1 個交易日；OptiView 未取得處沿用 11-12 或 11-16 舊值並標日期）；即時行情 CNBC 主源、TradingView 備援。九個原看板站繼續運行，各面板附連結。</p>
-  <p>附註：NVDA 11-18 盤後價未取得，標示未取得，不自編數值。期權牆位一律標註快照日期，不得把舊快照寫成當日值。</p>
+  <p>數據來源：收盤價與損益結算（11-19 正式收盤，帳本 last_prices.json，Ledger 官方收盤；九股日報 11-19 數字一致）、各原看板期權快照（11-18 快照，滯後 1 個交易日，逐檔標明；AMAT 為 SquawkFlow 11/19 當日快照）；即時行情 CNBC 主源、TradingView 備援。九個原看板站繼續運行，各面板附連結。</p>
+  <p>附註：期權牆位一律標註快照日期，不得把舊快照寫成當日值。各股標籤的市值、Beta、P/C、ATM IV、IV Rank、分析師共識等欄位以九個追蹤看板 11-19 更新版為準；本頁僅同步任務書已給出的 11-19 數值，未給出的欄位不沿用 11-18 舊值充當 11-19 值。</p>
   <p>僅供研究參考，不構成投資建議。</p>
 </footer>
 
@@ -209,120 +202,116 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-si
 
 <script>
 var STOCKS = [
- {sym:"SPCX", name:"SpaceX（未上市持股對應）", close:143.50, chg:1.27,
-  plain:"漲 1.27%，收盤 $143.50；開 $143.23／高 $146.30／低 $141.22／前收 $141.70；量 85,245,028 股；市值約 $1.95T；5 日 +2.68%；1 個月 -3.01%；52 週 $104.83–$225.64；Beta 3.74。期權（11-17 快照）：P/C 0.94；ATM IV 54.4%（OptiView）／65.2%（FlashAlpha）；IV Rank 13；Max Pain $145；淨 GEX +$38.6M（由 -$49.0M 翻回正值）。做空 10-30 結算 141,051,437 股，佔比 38.55%（ChartExchange）／1.04%（MarketBeat），回補 1.22 天；FINRA 每日做空占比 11-18 為 57.64%。分析師：MarketBeat $243.60 Moderate Buy（47 家）；TipRanks $267.76 Strong Buy（34 家）；中位數 $248；最高 $800（Raymond James）／最低 $142（Moffett Nathanson）。持倉 13 股 @ $150.053，持有不動。",
+ {sym:"SPCX", name:"SpaceX（未上市持股對應）", close:138.43, chg:-3.53,
+  plain:"跌 3.53%，收盤 $138.43；前收 $143.50；區間 $135.50–$147.29，成交約 1.19 億股。期權（11-18 快照＋SquawkFlow 11/19 交叉）：淨 GEX 兩模型分歧——FlashAlpha +$70.4M vs SquawkFlow -$58.3M／1%，狀態未定；Put Wall $140（FlashAlpha，已跌破 -1.13%）／$135（SquawkFlow，仍在上方 +2.49%）；Call Wall $150／$145；Max Pain $145。做空成交占比 60.33%（近 5 日最高）。持倉 13 股 @ $150.053，持有不動。",
   hold:"13 股 @ $150.053（成本）",
-  walls:[["天花板（OI Call Wall）","$200（11-12 舊值）"],["地板（OI Put Wall）","$135（11-12 舊值）"],["Gamma 牆","Call $150／Put $135"],["Max Pain","$145"],["淨 GEX","+$38.6M（由 -$49.0M 翻回正值）"]],
-  wallNote:"期權為 11-17 快照（滯後 1 個交易日）；OI 牆為 11-12 舊值。",
-  strat:[["盯價","$135（地板）／ $150（Gamma 天花板）"],["v2 狀態","持有不動"]],
-  extra:"新評級：Morgan Stanley 11-18 重申 Overweight；Citi 11-18 維持 $280 Buy；Citi $240→$280（11-16）；Cantor 11-17 重申 Overweight $345。事件：USSF-317 再延至 11-19 18:46 PT；USSF-266 官方確認 11-23 08:04 PT；Flight 15 FAA 是否調查未確認、Flight 16 日期未公布（NET 12-10 為未證實傳聞）；NVDA Q3 大超預期但股價反跌 -2.89%；SpaceX 擬發約 $40 億芯片債券（Bloomberg）；FOMC 12-08–09（12 月加息 25bp 概率約 95%–96%）；解禁 12-08 約 7.976 億股；下次財報日期四說不一（01-19／02-17／02-25）。FINRA 近 5 日做空占比 52.30／56.24／55.07／55.24／57.64%。",
+  walls:[["天花板（Call Wall）","$150（FlashAlpha）／$145（SquawkFlow）"],["地板（Put Wall）","$140（FlashAlpha，已跌破）／$135（SquawkFlow）"],["Max Pain","$145"],["淨 GEX","FlashAlpha +$70.4M vs SquawkFlow -$58.3M／1%（分歧，狀態未定）"]],
+  wallNote:"期權為 11-18 快照＋SquawkFlow 11/19 交叉（滯後 1 個交易日）。",
+  strat:[["盯價","$135（SquawkFlow 地板）／ $150（Call Wall）"],["v2 狀態","持有不動"]],
+  extra:"事件：12/08 約 7.976 億股解禁。做空成交占比 60.33% 為近 5 日最高。",
   url:"https://tonytcfu.github.io/spacex-dashboard/", tv:"NASDAQ:SPCX"},
- {sym:"TEM", name:"Tempus AI", close:63.62, chg:0.30,
-  plain:"漲 0.30%，收盤 $63.62；開 $63.88／高 $65.24／低 $61.71／前收 $63.43；量 5,348,138 股；市值 $11.60B；5 日 -21.01%（六連跌於 11-18 終止）；1 個月 -1.12%／6 個月 +39.73%／年初至今 +7.74%；52 週 $40.77–$89.09；Beta 3.61；50／200 日均線 $72.82／$57.54。期權（11-17 快照）：P/C 0.57；ATM IV 79.8%；IV Rank 53；Max Pain $65。做空 10-30 結算 24,536,896 股，佔比 17.76%，回補 4.48 天；FINRA 11-18 做空占比 64.94%。分析師：MarketBeat $79.37 Hold（22 家）；S&P Global $89.56 Buy（20 家）；最高 $120（Mizuho）／最低 $50（Stifel）；自 11-03 以來無新評級。0 股觀察倉。",
+ {sym:"TEM", name:"Tempus AI", close:59.61, chg:-6.30,
+  plain:"跌 6.30%，收盤 $59.61；前收 $63.62；區間 $59.41–$66.08，成交約 529 萬股；自 11/09 的 $84.44 起 8 個交易日 -29.41%。期權（11-18 快照）：淨 GEX +$4.5M（減震器，較 11/17 的 +$6.3M 更薄）；Put Wall $60（新跌破 -0.65%，由 $65 下移）；Call Wall $70；Max Pain $65；期權隱含預期波幅 ±22.90%。做空成交占比 60.34%。HC Wainwright 重申 Buy $85。0 股觀察倉。",
   hold:"0 股（觀察倉）",
-  walls:[["天花板（OI Call Wall）","$100（11-12 舊值）"],["地板（OI Put Wall）","$50（11-12 舊值）"],["Gamma 牆","Call $70／Put $65（11-16 舊值）"],["Max Pain","$65"],["淨 GEX","+$9.5M（11-16 舊值）"]],
-  wallNote:"期權為 11-17 快照；OI 牆 11-12 舊值、Gamma 牆與淨 GEX 為 11-16 舊值，均標日期。",
-  strat:[["盯價","$70（Gamma 天花板）／ $65（Gamma 地板）"],["v2 狀態","無持倉，純追蹤"]],
-  extra:"事件（重大）：AstraZeneca $200M 續約 8-K（11-18）——2027–2031 年合計 $200M、每年目標 $40M／最低 $32M，修正案 11-16 簽署、2027-01-01 生效；Personalis 股東大會 11-30；CTOS 年會 11-18–21 首爾舉行中；Q4 財報日期三說不一（02-22／02-23／03-02，皆未確認）。FINRA 近 5 日做空占比 64.54／61.67／64.69／65.83／64.94%。",
+  walls:[["天花板（Call Wall）","$70"],["地板（Put Wall）","$60（新跌破 -0.65%，由 $65 下移）"],["Max Pain","$65"],["淨 GEX","+$4.5M（減震器）"],["期權隱含預期波幅","±22.90%"]],
+  wallNote:"期權為 11-18 快照（滯後 1 個交易日）。",
+  strat:[["盯價","$60（地板）／ $70（天花板）"],["v2 狀態","無持倉，純追蹤"]],
+  extra:"事件：Personalis 股東大會 11/30 投票。HC Wainwright 重申 Buy $85。",
   url:"https://tonytcfu.github.io/tempus-dashboard/", tv:"NASDAQ:TEM"},
- {sym:"NVDA", name:"NVIDIA", close:150.96, chg:-2.89,
-  plain:"跌 2.89%，收盤 $150.96；開 $159.19／高 $159.70／低 $150.40（盤中低距 $150 Put Wall 僅 $0.40）；前收 $155.46；量 343.01M 股；11-18 盤後價未取得。期權（11-17 快照）：Call OI 10,153,733／Put OI 8,804,215，P/C 0.87；ATM IV FlashAlpha 92.8%；Max Pain $180（上期 $185）；淨 GEX +$20.9M（FlashAlpha，由 -$255.3M 翻正；其他模型仍為負，方向分歧，並列標註不取平均）。做空 10-30 結算 279,579,505 股，佔流通股 1.21%，回補 2.80 天；FINRA 11-18 做空占比 35.81%（近 5 日最高）。財報 Q3 FY2027（11-17 盤後）：營收 $115.8B（+103% YoY）、非 GAAP EPS $2.68、GAAP EPS $2.70、數據中心 $107.6B（+110%）、毛利率 GAAP 74.8%／非 GAAP 74.9%、Q4 指引營收 $130.0B ±3%（共識 $125.25B）。持倉 6 股 @ $208.10。",
+ {sym:"NVDA", name:"NVIDIA", close:145.98, chg:-3.30,
+  plain:"跌 3.30%，收盤 $145.98；前收 $150.96；區間 $145.71–$158.13，成交約 3.20 億股（約均量 2 倍）；六連跌，自 11/06 的 $186.64 起 -21.79%；盤中最低 $145.71 創 52 週新低。期權（11-18 快照）：淨 GEX 由 +$20.9M 翻回 -$249.5M；Put Wall $150 首次收盤失守（-2.68%）；Call Wall $200；Max Pain $180。做空成交占比 29.11%。Q4 毛利率指引 71%–72% 低於 Q3 的 74.9%；永久 CEO 搜尋中、SEC 調查報導（僅 WSJ 一家，未獲官方證實）。持倉 6 股 @ $208.10。",
   hold:"6 股 @ $208.10（成本）",
-  walls:[["天花板（Call Wall）","$200（OI／Gamma）"],["地板（Put Wall）","$150（OI／Gamma）"],["Max Pain","$180"],["淨 GEX","+$20.9M（FlashAlpha；其他模型仍為負，分歧並列）"]],
-  wallNote:"期權為 11-17 快照（滯後 1 個交易日）。11-18 盤後價未取得。",
-  strat:[["v2 兜底","$188（續跌破，連續第 5 個交易日下跌）"],["減半信號","已於 2026-11-15 撤回；現 6 股為主動管理後倉位"],["財報判定","Q4 指引高於共識，「低於共識才動籃子」未觸發，持倉不動"]],
-  extra:"分析師：LSEG／Reuters 平均目標價 $251.74（由 11-16 的 $265.70 下修）；最高 $515（Raymond James）／最低 $170（HSBC）。11-18 財報後更新：JPMorgan $215→$230、Wedbush $275→$293、BofA 維持 $280、TD Cowen 維持 $200、RBC $230、DA Davidson $200、Rosenblatt $300、Cantor $250、Needham $200、Piper $300→$230、Jefferies $300→$250、Wells $300→$250、Citi 維持 $225、Morgan Stanley $267→$260、Goldman 維持 $220、Barclays 維持 $210、Morningstar 公允價值 $250 維持、Dan Ives $225。Q4 毛利率指引 71–72%、FY2028 增長指引上調至約 +75%（原 +70%）、回購授權剩餘約 $227.3B、股息 $0.25（12-23 派發、12-02 登記）。事件：眾議院能源與商務委員會 11-18 發函啟動調查、要求 12-02 前簡報；黃仁勳 12-01 接受三眾議院委員會閉門筆錄訪談、Teter 12-02 作證；參議院銀行委員會主席稱黃仁勳已同意公開作證（日期未定）；Ackman 11-18 公開指控董事會「重大治理失誤」；FOMC 12-08–09；Waller 稱 12 月可能加息 50bps。FINRA 近 5 日 29.91／33.38／24.14／23.60／35.81%。",
+  walls:[["天花板（Call Wall）","$200"],["地板（Put Wall）","$150（首次收盤失守 -2.68%）"],["Max Pain","$180"],["淨 GEX","-$249.5M（由 +$20.9M 翻回負值）"]],
+  wallNote:"期權為 11-18 快照（滯後 1 個交易日）。",
+  strat:[["v2 兜底","$188（續跌破）"],["減半信號","已於 2026-11-15 撤回；現 6 股為主動管理後倉位"],["財報判定","Q4 指引高於共識，「低於共識才動籃子」未觸發，持倉不動"],["概率卡情景 C","收盤跌破 $150 觸發基本面核對：Q3 營收 $115.84B（+103%）、EPS $2.68、Q4 指引 $130B 上調，基本面未破裂，按 v2 不賣"]],
+  extra:"事件：黃仁勳國會作證 12/01；股息 12/23（登記日 12/02）。下跌主因是治理折價＋宏觀＋情緒，非基本面惡化。",
   url:"https://tonytcfu.github.io/nvda-dashboard/", tv:"NASDAQ:NVDA"},
- {sym:"MU", name:"Micron", close:705.27, chg:-1.00,
-  plain:"跌 1.00%，收盤 $705.27；開 $718.50／高 $722.96／低 $687.34（盤中一度跌破 $700 牆，收盤收回牆上）；前收 $712.42；量 26.94M 股；盤後 17:08 ET $702.45（僅腳註、非收盤）。期權（11-17 快照）：Call OI 1,930,102／Put OI 1,725,597，P/C 0.89；ATM IV FlashAlpha 96.6%；Max Pain $790（上期 $800）；淨 GEX +$10.1M（FlashAlpha，由 -$82.7M 翻正；其他模型仍為負，方向分歧，並列標註）。做空 10-30 結算 23,385,015 股，佔流通股 2.07%，回補 0.92 天；FINRA 11-18 為 31.12%。分析師：StockAnalysis Strong Buy，均值 $1,561.91（49 家）；TipRanks $1,624.42；MarketBeat $1,435.58；最高 $3,000（D.A. Davidson）／最低 $621；RBC 11-18 重申 Outperform、$1,500 不變。持倉 1 股 @ $1,090.80。",
+ {sym:"MU", name:"Micron", close:690.44, chg:-2.10,
+  plain:"跌 2.10%，收盤 $690.44；前收 $705.27；區間 $689.28–$760.01，成交約 3,480 萬股；早盤一度 +6.5% 至 $760.01 後全數回吐（Lynx 重申 $1,325 目標價）。期權（11-18 快照＋SquawkFlow 11/19 交叉）：淨 GEX 兩模型一致為負——FlashAlpha -$56.3M、SquawkFlow -$63.8M／1%（加速器）；Put Wall $700（收盤失守 -1.37%）與 OI Put Wall $800；Call Wall $900；Max Pain $780。GTA Wire：11/19 期權權利金成交 $2.8B、84% 在 Put。連續第 4 個交易日低於 200 日均線 $769.93（-10.32%），RSI 33。持倉 1 股 @ $1,090.80。",
   hold:"1 股 @ $1,090.80",
-  walls:[["天花板（Call Wall）","$900（OI／Gamma）"],["地板（Put Wall）","$700（OI／Gamma；Put 牆自 $800 下移）"],["Max Pain","$790；11-20 到期 $800（SquawkFlow）／$810（SPX Lens）並列"],["淨 GEX","+$10.1M（FlashAlpha；其他模型仍為負，分歧並列）"]],
-  wallNote:"期權為 11-17 快照（滯後 1 個交易日）。",
-  strat:[["v2 兜底","$788（續跌破，A 檔候選不變）"],["回撤線","$816 下方連續第 11 個交易日"],["盯價","收盤 $705.27 高於 Gamma Put Wall $700 僅 $5.27"]],
-  extra:"財報：FQ4 2026（2026-09-30）營收 $54.23B、Non-GAAP EPS $33.42；FQ1 2027 指引營收 $61.5B ± $1.5B、Non-GAAP EPS $38.15 ± $1.00；下次財報日期未確認（12-15／12-16／12-23 三方分歧）。事件：Anthropic IPO 已定價 $83／股（高於 $70–78 區間），11-19 首日交易（ANT），MU 私募 $10 億（約 1,205 萬股）；桃園勞資：11/17 下午第 4 次調解在桃園市政府安排下舉行，閉門 4 小時以上仍無共識，下次調解 11/26 下午；雙方對公司團體協約條件有分歧，工會將把公司方案交付會員投票；相關企業工會登記審查進行中；停工的是未投產新廠 Fab 11E，非現有產能；下跌非勞資造成。TomorrowX Summit 11-18；SNDK 拆股 11-19 生效；ITC 聽證 11-23–24；UBS 大會 12-01；回購授權 12-09 生效。FINRA 近 5 日 32.07／35.33／30.54／25.38／31.12%。",
+  walls:[["天花板（Call Wall）","$900"],["地板（Put Wall）","$700（收盤失守 -1.37%）；OI Put Wall $800"],["Max Pain","$780"],["淨 GEX","FlashAlpha -$56.3M、SquawkFlow -$63.8M／1%（一致為負，加速器）"]],
+  wallNote:"期權為 11-18 快照＋SquawkFlow 11/19 交叉（滯後 1 個交易日）。",
+  strat:[["v2 兜底","$788（續跌破，A 檔候選不變）"],["盯價","$700（地板）／ $800（OI Put Wall）"]],
+  extra:"桃園勞資：11/17 調解 4.5 小時仍無共識，下次調解 11/26 下午；工會 11/21–11/24 就現有方案舉行會員投票；更正：10/22 已有 24 小時警告性罷工（11 名工會幹部），全面罷工尚未發生、無罷工日期；今日下跌不是勞資爭議造成。DRAM 反壟斷案答辯截止 12/07；下季財報約 12/15。",
   url:"https://tonytcfu.github.io/micron-dashboard/", tv:"NASDAQ:MU"},
- {sym:"LRCX", name:"Lam Research", close:211.67, chg:0.47,
-  plain:"漲 0.47%，收盤 $211.67；開 $213.73／高 $214.90／低 $206.43／前收 $210.69；量 7,609,280 股。期權（11-17 快照）：Call OI 312,588／Put OI 327,681，P/C 1.05；ATM IV OptiView 70.2%／FlashAlpha 81.8%；IV Rank 63；預期波幅 ±$24.07（±11.37%，區間 $187.60–$235.74）；Max Pain $235；淨 GEX OptiView -$2.13B（名義口徑，與 FlashAlpha 舊值 -$4.7M 不可混用）；最熱行權價 $210；成交量／OI 比 0.28。做空 10-30 結算 27,501,835 股、2.21%、回補 2.17 天；FINRA 近 5 日均值 43.95%。分析師：MarketBeat Moderate Buy $357.57（32 家），較收盤 +68.93%；最高 $500／最低 $290；2026-11-17 Bernstein 重申 Buy $350。0 股觀察倉。",
+ {sym:"LRCX", name:"Lam Research", close:203.68, chg:-3.77,
+  plain:"跌 3.77%，收盤 $203.68；前收 $211.67；區間 $203.45–$221.96，成交約 1,290 萬股（高於 10 日均量約 25%）。期權（11-18 快照）：淨 GEX -$31.7M（較 11/17 的 -$24.7M 擴大約 28%）；Put Wall $210（收盤失守 -3.10%，連續三週貼牆後失守）；Call Wall $230；Max Pain $235；OI Put Wall $180。做空成交占比 34.16%。0 股觀察倉。",
   hold:"0 股（觀察倉）",
-  walls:[["天花板（OI Call Wall）","$300"],["地板（OI Put Wall）","$180"],["Gamma 牆","Call $230／Put $210（收盤僅高於 Put 牆 $1.67）"],["Max Pain","$235"],["淨 GEX","-$2.13B（OptiView 名義口徑）"]],
-  wallNote:"期權為 11-17 快照（滯後 1 個交易日）。",
-  strat:[["盯價","$230（Gamma 天花板）／ $210（Gamma 地板）"],["v2 狀態","觀察倉，不動作"]],
-  extra:"事件：NVDA 財報 11-17 盤後已公布（大超預期），11-18 NVDA 回吐、LRCX 小漲分化；國會簡報／作證日期 12-01／12-02 確認；Anthropic IPO 定價 $83（11-18 晚）；股息除息 12-02；FOMC 12-08/09；CPI 12-10；Q2 財報約 2027-01-27。FINRA 近 5 日 55.37／41.69／40.59／39.99／42.12%。",
+  walls:[["天花板（Call Wall）","$230"],["地板（Put Wall）","$210（收盤失守 -3.10%）；OI Put Wall $180"],["Max Pain","$235"],["淨 GEX","-$31.7M"]],
+  wallNote:"期權為 11-18 快照（滯後 1 個交易日）。",
+  strat:[["盯價","$210（地板）／ $230（天花板）"],["v2 狀態","觀察倉，不動作"]],
+  extra:"MU 桃園勞資爭議與 LRCX 無關，最多是板塊情緒的間接傳導，不得視為下跌原因。事件：12/01 管理層出席 UBS 科技大會。",
   url:"https://tonytcfu.github.io/lam-research-dashboard/", tv:"NASDAQ:LRCX"},
- {sym:"AVGO", name:"Broadcom", close:354.05, chg:3.64,
-  plain:"漲 3.64%，收盤 $354.05；開 $348.70／高 $357.34／低 $340.74／前收 $341.60；量 25,906,478 股。期權（11-17 快照）：Call OI 1,258,006／Put OI 1,328,943，P/C 1.06；ATM IV OptiView 61.8%／FlashAlpha 69.8%；IV Rank 82 High；預期波幅 ±$45.15（±12.75%，區間 $308.90–$399.20）；Max Pain $340；淨 GEX FlashAlpha -$7.2M／每 1%（負 Gamma，大幅收斂；OptiView +$662.78M 名義口徑翻正，分歧並列）；最熱行權價 $350；成交量／OI 比 0.70。做空 10-30 結算 51,943,604 股、1.11%、回補 2.36 天；FINRA 近 5 日均值 35.58%。分析師：MarketBeat Moderate Buy $525.19，較收盤 +48.33%；最高 $715／最低 $398；無新評級（11-17／11-18），最新仍為 TD Cowen 11-16 維持 Buy $475→$425。持倉 3 股 @ $353.547。",
+ {sym:"AVGO", name:"Broadcom", close:346.65, chg:-2.09,
+  plain:"跌 2.09%，收盤 $346.65；前收 $354.05；區間 $345.14–$369.26，成交約 2,500 萬股；一日即回吐 11/18 重新站上的 $350。期權（11-18 快照）：淨 GEX 三模型符號一致轉正——OptiView +$10.32B（量級一日跳變約 15 倍、存疑）、FlashAlpha +$169.6M、SquawkFlow 11/19 +$13.2M／1%（符號轉正、量級存疑、需復核）；Put Wall $350（收盤失守 -0.96%，11/18 剛站上即失守）；Call Wall $360；Max Pain $340（與 SquawkFlow Put Wall $340 重合）；OI 牆 Call $400／Put $300。50 日均線 $344.15 僅在收盤下方 0.7%。做空成交占比 34.76%。持倉 3 股 @ $353.547。",
   hold:"3 股 @ $353.547",
-  walls:[["天花板（OI Call Wall）","$400"],["地板（OI Put Wall）","$300"],["Gamma 牆","Call $350／Put $320（收盤已站上 Call 牆 $350 達 $4.05；Put 牆較 11-16 下移 $10）"],["Max Pain","$340"],["淨 GEX","FlashAlpha -$7.2M／每 1%；OptiView +$662.78M（分歧並列）"]],
-  wallNote:"期權為 11-17 快照（滯後 1 個交易日）。",
-  strat:[["B 檔／加倉條件","收盤 $354.05 重新站上 $350，價格條件重新滿足（11-13 失效後首次）；是否執行由策略覆核判定"],["v2 狀態","防守檔＋節流二檔下凍結新倉；遠高於 $312 兜底"]],
-  extra:"事件：NVDA 財報 11-17 盤後已公布（大超預期），11-18 AVGO +3.64%、NVDA -2.89% 分化；Anthropic IPO 定價 $83（11-18 晚），11-19 首日交易；VMware Explore 11-18/19；月度 OPEX 11-20；感恩節 11-26；FQ4 財報 12-09 盤後。FINRA 近 5 日 40.63／42.84／31.37／25.48／37.58%。Redburn 2026-11-13 由 Buy 降至 Neutral、目標價 $595→$398 背景不變。",
+  walls:[["天花板（Call Wall）","$360；OI Call $400"],["地板（Put Wall）","$350（收盤失守 -0.96%）；OI Put $300"],["Max Pain","$340（與 SquawkFlow Put Wall $340 重合）"],["淨 GEX","OptiView +$10.32B（存疑）、FlashAlpha +$169.6M、SquawkFlow +$13.2M／1%（符號一致轉正、量級存疑）"]],
+  wallNote:"期權為 11-18 快照＋SquawkFlow 11/19 交叉（滯後 1 個交易日）。",
+  strat:[["B 檔信號","11-18 收 $354.05 站上 $350 的 B 檔信號，11-19 收 $346.65 回落至 $350 下方，未站穩，失效"],["v2 狀態","線上僅 AVGO 守住兜底；防守檔＋節流二檔下凍結新倉"]],
+  extra:"事件：財報 12/09 盤後。50 日均線 $344.15 僅在收盤下方 0.7%。",
   url:"https://tonytcfu.github.io/broadcom-dashboard/", tv:"NASDAQ:AVGO"},
- {sym:"ETN", name:"Eaton", close:338.34, chg:0.36,
-  plain:"漲 0.36%，收盤 $338.34；開 $337.63／高 $342.44／低 $332.42／前收 $337.11；量 2,564,178 股；市值 $131.45B；股息率 1.30%；52 週 $311.92–$478.00（較高點 -29.22%）。價格位置：跌破兜底 $358（低 $19.66／-5.49%）；跌破 $370 OI Put Wall；最近支撐 $320 Gamma Put Wall（-5.42%）；最大 Gamma 行權價 $340（僅高於收盤 0.49%）。期權（OptiView 沿用 11-16 快照；鏈數據 as-of 11-17）：Call OI 83,709／Put OI 57,022，P/C 0.68；ATM IV OptiView 46.1%；IV Rank 65；預期波幅 ±$40.60（±12.0%，區間 $297.74–$378.94）；Max Pain $390（+15.27%）；淨 GEX -$21.55M（InsiderFinance，負 Gamma）。做空 10-30 結算 7,170,485 股、1.85%、回補 2.56 天；名義 $2.43B；借券費率 0.3%（IBKR）。分析師：MarketBeat Moderate Buy、均值 $476.86（23 家）、區間 $392–$539；stockanalysis Buy、均值 $468.74（29 家）、中位 $485；TipRanks 均值 $489.27（14 家）。持倉 2 股 @ $435.03。",
+ {sym:"ETN", name:"Eaton", close:330.57, chg:-2.30,
+  plain:"跌 2.30%，收盤 $330.57；前收 $338.34；區間 $329.96–$347.20，成交約 330 萬股（約均量 139%，放量下跌）。期權（11-18 快照）：淨 GEX -$21.4M（偏負、未定論）；Put Wall $320（收盤在其上方 3.20%，地板仍有效）；OI Put Wall $370 已跌破；Call Wall $400；Max Pain $390。50 日均線已下穿 200 日均線（死亡交叉）、RSI 36.07。做空成交占比 33.80%（近 5 日最低）。持倉 2 股 @ $435.03。",
   hold:"2 股 @ $435.03",
-  walls:[["天花板（Call Wall）","$420（OI）／$400（Gamma）"],["地板（OI Put Wall）","$370（已跌破）"],["Gamma 地板","$320"],["Max Pain","$390"],["淨 GEX","-$21.55M（InsiderFinance，負 Gamma）"]],
-  wallNote:"期權 OptiView 沿用 11-16 快照；鏈數據 as-of 11-17。",
-  strat:[["盯價","$370（OI 牆）／ $320（Gamma 地板）"],["v2 兜底","$358（跌破，低 $19.66；基本面未破，按 v2 不賣、列 A 檔候選）"]],
-  extra:"新動作：11-18 Erste Group 由 Buy 下調至 Hold（無目標價）；Zacks 11-17 上調 FY2026 EPS 預估至 $13.74。事件：股息派發 11-27；Dana 特別股東大會 12-07（08:30 ET，需過半數 99,837,574 股）；FOMC 12-08–12-09（10 月紀要 11-18 已公布）；Mobility／Dana 合併目標 2027 年 Q1 末完成；Q4 財報預估 2027-02-01–02-02；內部人買入：Johnson 300 股 @ $338.82＋Foster 200 股 @ $346.24，合計 500 股、$170,894（11-16，Form 4 已披露）。FINRA 近 5 日 33.08／51.33／34.63／43.73／34.06%。",
+  walls:[["天花板（Call Wall）","$400"],["地板（Put Wall）","$320（收盤上方 +3.20%）；OI Put Wall $370 已跌破"],["Max Pain","$390"],["淨 GEX","-$21.4M（偏負、未定論）"]],
+  wallNote:"期權為 11-18 快照（滯後 1 個交易日）。",
+  strat:[["盯價","$320（地板）／ $370（OI 牆）"],["v2 兜底","$358（跌破；基本面未破，按 v2 不賣、列 A 檔候選）"]],
+  extra:"事件：11/27 派息 $1.10／股（除息日 11/10 已過）。技術面：死亡交叉、RSI 36.07。",
   url:"https://tonytcfu.github.io/eaton-dashboard/", tv:"NYSE:ETN"},
- {sym:"HOOD", name:"Robinhood", close:69.17, chg:-0.03,
-  plain:"跌 0.03%，收盤 $69.17；開 $69.05／高 $69.95／低 $67.56／前收 $69.19；量 15,970,446 股；市值約 $62.29B；P/E（TTM）32.7x；52 週 $63.52–$139.75（較高點 -50.50%，回高點需 +102.0%）。價格位置：續跌破兜底 $85（低 $15.83／-18.62%）；跌破 $70 OI／Gamma Put Wall（僅低 $0.83／-1.20%）；11-13→11-18 五日 -11.16%。期權（OptiView 沿用 11-16 快照；鏈數據 as-of 11-17／11-18 盤中）：Call OI 1,115,340／Put OI 811,643，P/C 0.73；ATM IV OptiView 73.2%／FlashAlpha 73.4%；IV Rank 54；預期波幅 ±$11.72（±16.9%，區間 $57.45–$80.89）；Max Pain $90（全部到期日口徑；11-20 到期 $80／$81）；淨 GEX SquawkFlow -$11.0M（負 Gamma，較上期 -$12.8M 收窄）。做空 10-30 結算 35,247,620 股、4.52%、回補 1.8 天；名義 $2.44B；借券費率 0.3%（IBKR）。持倉 5 股 @ $111.52。",
+ {sym:"HOOD", name:"Robinhood", close:68.65, chg:-0.75,
+  plain:"跌 0.75%，收盤 $68.65；前收 $69.17；區間 $68.56–$74.04，成交約 2,510 萬股（約均量 124%）；盤中一度 +5.4% 至 $74.04 後全部回吐；收出 99 日區間內新的最低收盤。期權（11-18 快照＋SquawkFlow 11/19 復核）：淨 GEX 兩家方向一致仍為負、但同步收窄——FlashAlpha -$18.3M（前值 -$20.8M）、SquawkFlow -$10.5M／1%（前值 -$11.9M）（加速器、力度減弱）；Gamma Put Wall 兩家收斂同為 $65（收盤在其上方 +5.6%）；OI Put Wall $70 已跌破；Max Pain $85。做空成交占比 48.17%。比特幣約 $61,590（-1.5%，7 月以來最低）。持倉 5 股 @ $111.52。",
   hold:"5 股 @ $111.52",
-  walls:[["天花板（Call Wall）","$100（OI／Gamma）"],["地板（Put Wall）","$70（OI／Gamma，已跌破）；SquawkFlow 新牆 Call $75／Put $65、翻轉 $72"],["Max Pain","$90（11-20 到期 $80／$81）"],["淨 GEX","-$11.0M（SquawkFlow，負 Gamma）"]],
-  wallNote:"期權 OptiView 沿用 11-16 快照；鏈數據 as-of 11-17／11-18 盤中；Gamma 牆為 11-16 值。",
-  strat:[["規則 B","全出 5 股觸發已成立，但帳本無賣出紀錄、5 股仍在持倉，不得預設已賣出"],["v2 兜底","$85（續跌破）"]],
-  extra:"分析師：stockanalysis Buy、均值 $126.77（32 家）、中位 $127、區間 $59–$170；MarketBeat Moderate Buy、均值 $124.01（35 家）、區間 $80–$165；TipRanks 均值 $131.18（22 家，較上期 $139 下調）。新動作：11-17 Mizuho 重申 Outperform、目標價 $130 不變；Evercore $130→$100（11-17）已列入上期。事件：Anthropic IPO 已定價 $83／股（11-19 首日交易 ANT，Robinhood 為分銷券商之一）；路易斯安那州 TRO 到期 11-22、Kalshi 初步禁令聽證會 11-23、州法院聽證會 11-30；Kalshi 新澤西案回應截止 12-07；Cboe KPI 二元期權 11-09 已上線，Robinhood 計劃 11-16 起提供（實際上線未確認）；11 月經營數據預計 12-10 左右；FOMC 12-15–12-16；Q4 財報預估 2027-02 上旬。FINRA 近 5 日 52.46／49.61／50.67／39.37／43.66%。",
+  walls:[["天花板（Call Wall）","$73–75 區間（見盯價）"],["地板（Put Wall）","Gamma $65（兩家一致，收盤上方 +5.6%）；OI $70 已跌破"],["Max Pain","$85"],["淨 GEX","FlashAlpha -$18.3M、SquawkFlow -$10.5M／1%（仍為負、同步收窄）"]],
+  wallNote:"期權為 11-18 快照＋SquawkFlow 11/19 復核（滯後 1 個交易日）。",
+  strat:[["規則 B","已於 11/02 收盤確認觸發、全出 5 股，待 Tony 回報成交價，不得預設已成交"],["v2 兜底","$85（續跌破）"]],
+  extra:"比特幣約 $61,590（-1.5%，7 月以來最低）。盯 $65（跌破則下看 $60）與 $73–75。",
   url:"https://tonytcfu.github.io/robinhood-dashboard/", tv:"NASDAQ:HOOD"},
- {sym:"TSM", name:"台積電 ADR", close:362.62, chg:0.81,
-  plain:"漲 0.81%，收盤 $362.62；開 $368.05／高 $368.85／低 $356.77／前收 $359.69；量 11,982,497 股；市值約 $1.88T；5 日 -12.27%／1 月 -18.53%／年初至今約 +19.3%。期權：FlashAlpha 11-17 18:14 ET（OptiView 本期未取得，11-12 舊值沿用並標註日期）：ATM IV FlashAlpha 69.3%（HV20 67.1%），OptiView 舊值 38.8%（11-12）；預期波幅約 ±19.9%（推算值）；P/C 1.02（OI，90 天窗口）；成交量／OI 比約 0.11；淨 GEX FlashAlpha +$92.7M（快照價 $385.74 為盤後價、存疑）vs SquawkFlow -$82.5M／OptionScout -$169.56M／Bullflow -$161.53M（三家皆負，分歧明確標註、不取平均）。做空 10-30 結算 32,199,918 股、0.63%、回補 2.62 天（較 10/15 +9.86%）。分析師：Buy，均值 $533.89（16 家），最高 $670／最低 $330，隱含 +47.23%；自 11-13 以來無新評級。持倉 7 股 @ $406.167（總成本 $2,843.17；11-16 盤中買入 1 股 @ $374.06）。",
+ {sym:"TSM", name:"台積電 ADR", close:352.09, chg:-2.90,
+  plain:"跌 2.90%，收盤 $352.09；前收 $362.62；區間 $351.14–$374.77，成交約 1,810 萬股；近 5 個交易日 -13.17%。期權（11-18 快照＋SquawkFlow 11/19 復核）：淨 GEX 兩模型同為負——FlashAlpha -$148.4M（由 +$92.7M 翻負）、SquawkFlow -$84.6M／1%（加速器）；Put Wall $360（FlashAlpha，已跌破 -2.20%）／$350（SquawkFlow，仍守在上方僅 +0.60%，$2.09）；Call Wall $360／$400；Max Pain $400。做空成交占比 35.29%（做空量較前一日大增約 2.4 倍）。持倉 7 股 @ $406.167（總成本 $2,843.17；11-16 盤中買入 1 股 @ $374.06）。",
   hold:"7 股 @ $406.167（總成本 $2,843.17）",
-  walls:[["天花板（OI Call Wall）","$500（GreekSoup OI 口徑）"],["地板（OI Put Wall）","$400"],["Gamma 牆","Call $400（FlashAlpha）／Put $360（三源一致）"],["Max Pain","$400（11-12 舊值）"],["淨 GEX","+$92.7M（FlashAlpha，存疑）vs 三家皆負（分歧並列）"]],
-  wallNote:"期權 FlashAlpha 為 11-17 18:14 ET 快照；OptiView 本期未取得，舊值為 11-12 並標日期；Max Pain 為 11-12 舊值。",
-  strat:[["v2 兜底","$392（續跌破，11-16、11-17、11-18 連續三日；不賣、列 A 檔候選）"],["盯價","$400（牆位）／ $360（Gamma 地板）"]],
-  extra:"事件：NVDA 財報 11-17 盤後已公布（大超預期，但 NVDA 11-18 反跌 -2.89%，TSM 分化 +0.81%）；Anthropic 定價 11-18、首日交易 11-19；MSCI 11-30；11 月營收 12-10；Q4 財報 2027-01-14／01-21 兩說；Fab 22 截至 11-18 無新進展。ADS 除息日 12-10（$1.0854／ADS，2027-01-07 派發）。最近評級 11-04 Bernstein $554→$600、Weiss 降至 Hold。FINRA 近 5 日（11-12→11-18）29.47／25.73／17.08／9.65／14.52%。",
+  walls:[["天花板（Call Wall）","$360（SquawkFlow）／$400（FlashAlpha）"],["地板（Put Wall）","$360（FlashAlpha，已跌破）／$350（SquawkFlow，僅上方 +0.60%）"],["Max Pain","$400"],["淨 GEX","FlashAlpha -$148.4M、SquawkFlow -$84.6M／1%（同為負，加速器）"]],
+  wallNote:"期權為 11-18 快照＋SquawkFlow 11/19 復核（滯後 1 個交易日）。",
+  strat:[["v2 兜底","$392（續跌破，兜底線之下 -10.18%；不賣、列 A 檔候選）"],["盯價","$350（地板邊緣）／ $360（牆位）"]],
+  extra:"BIS 新規 11/19 生效，台積電暫停部分 16nm 及以下中國客戶訂單待美方許可；台股同日 -4.40%，2330 收 NT$2,100（-3.45%）。台積電 11/19 完成 $500M Anthropic 入股（$83／股、6,024,096 股 Class N）。",
   url:"https://tonytcfu.github.io/tsm-dashboard/", tv:"NYSE:TSM"}
 ];
 
 
 var PNL = [
- ["SPCX","13","$150.053",1865.50],["NVDA","6","$208.10",905.76],["TSM","7","$406.167",2538.34],
- ["AVGO","3","$353.547",1062.15],["ETN","2","$435.03",676.68],["HOOD","5","$111.52",345.85],
- ["CRSP","10","$53.786",401.90],["VRT","2","$201.18",388.96],["AMAT","1","$408.00",352.30],
- ["BEAM","5","$25.716",105.05],["SKHY","1","$160.90",122.47],["GEV","1","$928.18",772.22],
- ["MU","1","$1,090.80",705.27]
+ ["SPCX","13","$150.053",1799.59],["NVDA","6","$208.10",875.88],["TSM","7","$406.167",2464.63],
+ ["AVGO","3","$353.547",1039.95],["ETN","2","$435.03",661.14],["HOOD","5","$111.52",343.25],
+ ["CRSP","10","$53.786",389.30],["VRT","2","$201.18",369.98],["AMAT","1","$408.00",338.93],
+ ["BEAM","5","$25.716",104.70],["SKHY","1","$160.90",119.20],["GEV","1","$928.18",756.28],
+ ["MU","1","$1,090.80",690.44]
 ];
 
 var EVENTS = [
- ["11-16","TSM 盤中買入 1 股（已執行）","盤中買入 1 股 @ $374.06，持倉增至 7 股、總成本 $2,843.17、均價 $406.167。","交易"],
- ["11-17","NVDA Q3 財報大超預期（已發生）","盤後公布 Q3 FY2027：營收 $115.8B、非 GAAP EPS $2.68，Q4 指引 $130.0B 高於共識 $125.25B；指引高於共識，「低於共識才動籃子」未觸發。","財報"],
- ["11-18","NVDA 財報後反跌（已發生）","NVDA 收 $150.96（-2.89%），AVGO +3.64%、TSM +0.81% 分化；眾議院能源與商務委員會發函啟動調查，要求 12-02 前簡報；Ackman 指控董事會「重大治理失誤」。","事件"],
- ["11-18","TEM AstraZeneca 續約 8-K（已發生）","2027–2031 年合計 $200M、每年目標 $40M／最低 $32M，修正案 11-16 簽署、2027-01-01 生效。","事件"],
- ["11-18","策略 v2 總覆核（已完成）","環境記分卡重打為 -4 防守檔（v2.1）；目標截止 2027-04-06（182 天窗口）；衛星時間止損建議待批准：CRSP 10 股、AMAT 1 股、VRT 2 股約 $1,131.47 回現金，買腿凍結。","紀律"],
- ["11-19","Anthropic 首日交易（ANT）","IPO 已定價 $83／股（高於 $70–78 區間），11-19 首日交易；SNDK 拆股同日生效；SPCX USSF-317 再延至 11-19 18:46 PT。","事件"],
- ["11-20","月度 OPEX","期權到期日，牆位結構可能重設。","期權"],
- ["11-23","SPCX USSF-266／HOOD Kalshi 聽證","USSF-266 官方確認 11-23 08:04 PT；Kalshi 初步禁令聽證會 11-23；ITC 聽證 11-23–24。","事件"],
- ["11-26","MU 桃園勞資下次調解／感恩節","桃園下次調解 11-26 下午（第 4 次 11-17 無共識）；美股感恩節 11-26。","勞資"],
- ["11-30","TEM Personalis 股東大會／MSCI","Personalis 股東大會 11-30；MSCI 11-30；HOOD 州法院聽證會 11-30。","事件"],
- ["12-01","NVDA 國會閉門訪談","黃仁勳 12-01 接受三眾議院委員會閉門筆錄訪談，Teter 12-02 作證。","事件"],
- ["12-08","SPCX 解禁＋FOMC 12-08–09","SPCX 約 7.976 億股解禁；FOMC 12-08–09（12 月加息 25bp 概率約 95%–96%）。","解禁"],
- ["12-09","AVGO FQ4 財報（盤後）","持倉事件，事件前出概率卡；MU 回購授權 12-09 生效。","財報"],
- ["12-10","CPI／TSM 11 月營收","CPI 12-10；TSM 11 月營收 12-10、ADS 除息 12-10；Flight 16 NET 12-10 為未證實傳聞。","事件"]
+ ["11-19","Anthropic 首日交易（已發生）","首日收 $97.17（定價 $83，+17.07%，開盤 $111.50 沖高回落）；台積電同日完成 $500M 入股（$83／股、6,024,096 股 Class N）。","事件"],
+ ["11-19","NVDA 跌破 $150 觸發核對（已發生）","收 $145.98 觸發 11/12 概率卡情景 C 基本面核對：Q3 營收 $115.84B、EPS $2.68、Q4 指引 $130B 上調，基本面未破裂，按 v2 不賣，持有 6 股不動。","紀律"],
+ ["11-21–24","MU 工會會員投票","工會 11/21–11/24 就現有方案舉行會員投票；下次調解 11/26 下午。","勞資"],
+ ["11-27","ETN 派息","派息 $1.10／股（除息日 11/10 已過）。","事件"],
+ ["11-30","TEM Personalis 股東大會","Personalis 股東大會 11/30 投票。","事件"],
+ ["12-01","NVDA 黃仁勳國會作證／LRCX UBS 大會","黃仁勳國會作證 12/01；LRCX 管理層同日出席 UBS 科技大會。","事件"],
+ ["12-07","MU DRAM 反壟斷案答辯截止","答辯截止 12/07。","事件"],
+ ["12-08","SPCX 解禁","約 7.976 億股解禁。","解禁"],
+ ["12-09","AVGO 財報（盤後）","持倉事件，事件前出概率卡。","財報"],
+ ["12-15","MU 財報（約）","下季財報約 12/15。","財報"],
+ ["12-23","NVDA 股息","股息 12/23（登記日 12/02）。","事件"],
+ ["2027-02-10","AMAT 下季財報（約）","下季財報約 2027-02-10。","財報"]
 ];
 
 
 function fmt(n,d){ return n.toLocaleString("en-US",{minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d}); }
 function chgHtml(c){ var cls=c>=0?"up":"down"; var s=(c>=0?"+":"")+c.toFixed(2)+"%"; return '<span class="'+cls+' num">'+s+'</span>'; }
 
-/* mini grid */
 var mini=document.getElementById("miniGrid");
 STOCKS.forEach(function(s,i){
   var b=document.createElement("button"); b.className="minicard"; b.type="button";
-  b.innerHTML='<span class="t">'+s.sym+'</span><br><span class="p num">$'+fmt(s.close)+'</span> '+chgHtml(s.chg)+'<br><span class="small">11-18 收盤</span>';
+  b.innerHTML='<span class="t">'+s.sym+'</span><br><span class="p num">$'+fmt(s.close)+'</span> '+chgHtml(s.chg)+'<br><span class="small">11-19 收盤</span>';
   b.addEventListener("click",function(){ selectTab(i); document.getElementById("tabRow").scrollIntoView({block:"start"}); });
   mini.appendChild(b);
 });
 
-/* tabs + panels */
 var tabRow=document.getElementById("tabRow"), panels=document.getElementById("panels");
 var labels=STOCKS.map(function(s){return s.sym;}); labels.push("損益表");
 labels.forEach(function(lab,i){
@@ -344,53 +333,51 @@ STOCKS.forEach(function(s,i){
   var walls=s.walls.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v num">'+w[1]+'</span></div>';}).join("");
   var strat=s.strat.map(function(w){return '<div class="kv"><span class="k">'+w[0]+'</span><span class="v">'+w[1]+'</span></div>';}).join("");
   sec.innerHTML=
-   '<div class="p-head"><span class="name">'+s.sym+'</span><span class="full">'+s.name+'</span><span class="badge">11-18 正式收盤</span></div>'
+   '<div class="p-head"><span class="name">'+s.sym+'</span><span class="full">'+s.name+'</span><span class="badge">11-19 正式收盤</span></div>'
    +'<div class="pricebox"><span class="bigprice num">$'+fmt(s.close)+'</span><span class="bigchg">'+chgHtml(s.chg)+'</span>'
    +'<span class="small">持倉：'+s.hold+'</span></div>'
    +'<p class="plain">'+s.plain+'</p>'
    +'<div class="grid2">'
-   +'<div class="box"><h3>期權牆位（11-17 快照）</h3>'+walls+'<p class="small" style="margin-top:8px">'+s.wallNote+'</p></div>'
+   +'<div class="box"><h3>期權牆位（11-18 快照）</h3>'+walls+'<p class="small" style="margin-top:8px">'+s.wallNote+'</p></div>'
    +'<div class="box"><h3>策略價位與 v2 狀態</h3>'+strat+'</div>'
    +'</div>'
    +'<p style="margin-top:14px">'+s.extra+'</p>'
    +'<div class="livebar"><button type="button" class="refresh" data-sym="'+s.sym+'">刷新行情</button>'
-   +'<span class="livestate small">即時行情尚未刷新（上方為 11-18 收盤基準）</span>'
+   +'<span class="livestate small">即時行情尚未刷新（上方為 11-19 收盤基準）</span>'
    +'<span class="liveval num"></span></div>'
    +'<a class="orig" href="'+s.url+'" target="_blank" rel="noopener">開啟 '+s.sym+' 原看板 →</a>';
   panels.appendChild(sec);
 });
 
-/* P&L panel */
 (function(){
   var sec=document.createElement("section"); sec.className="panel"; sec.setAttribute("role","tabpanel");
   var rows=PNL.map(function(r){
-    return '<tr><td data-label="代碼"><b>'+r[0]+'</b></td><td data-label="股數" class="num">'+r[1]+'</td><td data-label="成本" class="num">'+r[2]+'</td><td data-label="市值（11-18 收盤）" class="num">$'+fmt(r[3])+'</td></tr>';
+    return '<tr><td data-label="代碼"><b>'+r[0]+'</b></td><td data-label="股數" class="num">'+r[1]+'</td><td data-label="成本" class="num">'+r[2]+'</td><td data-label="市值（11-19 收盤）" class="num">$'+fmt(r[3])+'</td></tr>';
   }).join("");
   sec.innerHTML=
-   '<div class="p-head"><span class="name">損益表</span><span class="full">同一個帳戶・11-18 收盤結算</span></div>'
-   +'<p class="plain">這就是上面九站持倉所屬的同一個帳戶：13 隻持倉（市值 <span class="num">$10,242.45</span>）、現金 <span class="num">$1,997.66</span>，帳戶總值 <span class="num">$12,240.11</span>。逐行市值加總等於持倉市值 $10,242.45，浮動損益合計 -$1,944.99。TSM 現持 7 股（11-16 買入 1 股 @ $374.06，總成本 $2,843.17）。NVDA 減半信號已於 2026-11-15 撤回，現 6 股為主動管理後倉位，Q4 指引高於共識、未觸發動籃子，持倉不動。v2 線下 9 隻（NVDA、TSM、MU、GEV、ETN、HOOD、CRSP、BEAM、AMAT）基本面未破、不賣、列 A 檔候選；線上 3 隻 AVGO、VRT、SKHY。HOOD 規則 B 全出觸發已成立，但帳本無賣出紀錄、仍按 5 股計。衛星時間止損建議待批准（股數不變）：CRSP 10 股、AMAT 1 股、VRT 2 股約 $1,131.47 回現金。</p>'
-   +'<p class="plain">AMAT 附註（無專屬標籤）：收盤 $352.30，持倉 1 股 @ $408.00，浮動 -$55.70。期權 SquawkFlow 11-18：淨 GEX -$10.1M；Call／Put 牆 $370／$330；Max Pain 11-20 $400、12-18 $400、12-11 $350、11-27 $395、12-04 $370；P/C 1.02。做空 10-30 結算 14,452,231 股、1.83%、回補 1.9 天；FINRA 近 5 日 36.55／49.03／36.47／19.78／33.81%。分析師 Moderate Buy、均值 $586.55（40 家），最高 $900／最低 $358.20，隱含 +66.49%；11-17 Bernstein 維持 $600；11-16 Susquehanna 重申 $900；11-13 BofA $650→$520、Summit Buy→Hold、TD Cowen $700→$500、Morgan Stanley $538→$507。v2：續跌破兜底 $378（第四個交易日），不賣、持有 1 股不動；下季財報 2027-02-11／02-18／約 02-10 三說未確認。浮動明細：SPCX -$85.19、NVDA -$342.84、TSM -$304.83、AVGO +$1.51、ETN -$193.38、HOOD -$211.75、CRSP -$135.96、VRT -$13.40、AMAT -$55.70、BEAM -$23.53、SKHY -$38.43、GEV -$155.96、MU -$385.53，合計 -$1,944.99；成本合計 $12,187.44。</p>'
-   +'<table class="stack"><thead><tr><th>代碼</th><th>股數</th><th>成本</th><th>市值（11-18 收盤）</th></tr></thead><tbody>'
+   '<div class="p-head"><span class="name">損益表</span><span class="full">同一個帳戶・11-19 收盤結算</span></div>'
+   +'<p class="plain">這就是上面九站持倉所屬的同一個帳戶：13 隻持倉（市值 <span class="num">$9,953.27</span>）、現金 <span class="num">$1,997.66</span>，帳戶總值 <span class="num">$11,950.93</span>。逐行市值加總等於持倉市值 $9,953.27，浮動損益合計 -$2,234.17。11/18–11/19 無新交易、無賣出。TSM 現持 7 股（11-16 買入 1 股 @ $374.06，總成本 $2,843.17，均價 $406.167）。NVDA 減半信號已於 2026-11-15 撤回，現 6 股為主動管理後倉位，Q4 指引高於共識、未觸發動籃子，持倉不動。v2 線下 11 隻（NVDA、TSM、MU、GEV、ETN、HOOD、CRSP、BEAM、AMAT、VRT、SKHY）基本面未破、不賣、列 A 檔候選；線上僅 AVGO。HOOD 規則 B 已於 11/02 收盤確認觸發、全出 5 股，待 Tony 回報成交價，不得預設已成交。衛星時間止損建議待批准（股數不變）：CRSP 出 10 股、AMAT 出 1 股、VRT 出 2 股，按 11-19 收盤約 $1,098.21，扣費淨回約 $1,092.45；輪動買腿因防守檔＋節流二檔凍結。</p>'
+   +'<p class="plain">AMAT 附註（無專屬標籤）：收盤 $338.93（-3.80%，前收 $352.30），區間 $337.88–$367.63，成交約 710 萬股；五日累計 -14.21%。持倉 1 股 @ $408.00，市值 $338.93，浮動 -$69.07。期權（SquawkFlow 11/19 15:59 ET 當日快照）：淨 GEX -$16.2M／1%（加速器，較 11/18 的 -$10.6M 更負）；Call Wall $350、Put Wall $330（收盤在其上方 $8.93，+2.71%）；翻轉點 $347.5（已跌破）；Max Pain 最近到期 11/20 為 $400、12/11 到期為 $350。做空持倉（10/30 結算）14,452,231 股、占流通股 1.83%，回補 1.9 天。基本面核對已於 11/13 完成（Q4 財報創紀錄：營收 $10.41B、EPS $4.16；Q1 指引營收 $11.1B、EPS $4.35），基本面完好、按 v2 不賣；持有 1 股不動。下季財報約 2027-02-10。浮動明細：SPCX -$151.10、NVDA -$372.72、AVGO -$20.69、GEV -$171.90、MU -$400.36、TSM -$378.54、ETN -$208.92、HOOD -$214.35、CRSP -$148.56、VRT -$32.38、AMAT -$69.07、BEAM -$23.88、SKHY -$41.70，合計 -$2,234.17。</p>'
+   +'<table class="stack"><thead><tr><th>代碼</th><th>股數</th><th>成本</th><th>市值（11-19 收盤）</th></tr></thead><tbody>'
    +rows
-   +'<tr><td data-label="代碼">現金</td><td data-label="股數">—</td><td data-label="成本">—</td><td data-label="市值（11-18 收盤）" class="num">$1,997.66</td></tr>'
-   +'</tbody><tfoot><tr><td>帳戶總值</td><td></td><td></td><td class="num">$12,240.11</td></tr></tfoot></table>'
+   +'<tr><td data-label="代碼">現金</td><td data-label="股數">—</td><td data-label="成本">—</td><td data-label="市值（11-19 收盤）" class="num">$1,997.66</td></tr>'
+   +'</tbody><tfoot><tr><td>帳戶總值</td><td></td><td></td><td class="num">$11,950.93</td></tr></tfoot></table>'
    +'<div class="grid2">'
    +'<div class="box"><h3>損益結算</h3>'
    +'<div class="kv"><span class="k">本金</span><span class="v num">$14,693.28</span></div>'
-   +'<div class="kv"><span class="k">持倉市值</span><span class="v num">$10,242.45</span></div>'
+   +'<div class="kv"><span class="k">持倉市值</span><span class="v num">$9,953.27</span></div>'
    +'<div class="kv"><span class="k">現金</span><span class="v num">$1,997.66</span></div>'
-   +'<div class="kv"><span class="k">已實現損益</span><span class="v num neg">-$439.62</span></div><div class="kv"><span class="k">浮動損益</span><span class="v num neg">-$1,944.99</span></div><div class="kv"><span class="k">累計損益</span><span class="v num neg">-$2,453.17（-16.70%）</span></div></div>'
+   +'<div class="kv"><span class="k">已實現損益</span><span class="v num neg">-$439.62</span></div><div class="kv"><span class="k">浮動損益</span><span class="v num neg">-$2,234.17</span></div><div class="kv"><span class="k">累計損益</span><span class="v num neg">-$2,742.35（-18.66%）</span></div></div>'
    +'<div class="box"><h3>目標口徑（同一帳戶）</h3>'
-   +'<div class="kv"><span class="k">目標總值</span><span class="v num">$10,374.61</span></div>'
+   +'<div class="kv"><span class="k">目標總值</span><span class="v num">$10,151.34</span></div>'
    +'<div class="kv"><span class="k">算法</span><span class="v">帳戶總值 − SPCX 市值</span></div>'
-   +'<div class="kv"><span class="k">距目標 $13,843.33</span><span class="v num">還需 +$3,468.72（+33.44%）</span></div>'
-   +'<div class="kv"><span class="k">剩餘時間</span><span class="v">138 天（已走完 44／182 天，至 2027-04-06）</span></div>'
+   +'<div class="kv"><span class="k">距目標 $13,843.33</span><span class="v num">還需 +$3,691.99（+36.37%）</span></div>'
+   +'<div class="kv"><span class="k">剩餘時間</span><span class="v">137 天（已走完 45／182 天，至 2027-04-06）</span></div>'
    +'<p class="small" style="margin-top:8px">10-06 基線定義不含 SPCX，所以目標口徑把 SPCX 市值扣除；這是同一帳戶的兩種算法，不是兩個帳戶。</p></div>'
    +'</div>';
   panels.appendChild(sec);
 })();
 
-/* events */
 var evBox=document.getElementById("events");
 EVENTS.forEach(function(e){
   var d=document.createElement("div"); d.className="ev";
@@ -398,7 +385,6 @@ EVENTS.forEach(function(e){
   evBox.appendChild(d);
 });
 
-/* live quotes: CNBC primary, TradingView fallback */
 function numOf(x){ if(typeof x==="number")return x; if(typeof x==="string"){var n=parseFloat(x.replace(/[$,\s%+]/g,""));return isNaN(n)?NaN:n;} return NaN; }
 function fetchJson(url,ms){
   var ctrl=new AbortController(); var t=setTimeout(function(){ctrl.abort();},ms||9000);
@@ -432,7 +418,7 @@ document.addEventListener("click",function(ev){
     var pctTxt=isNaN(q.pct)?"":("（"+(q.pct>=0?"+":"")+Number(q.pct).toFixed(2)+"%）");
     val.innerHTML="即時 $"+fmt(q.price)+pctTxt;
     val.className="liveval num "+(q.pct>=0?"up":"down");
-    state.textContent="來源："+q.src+"・剛剛刷新（與 11-18 收盤基準分開顯示）";
+    state.textContent="來源："+q.src+"・剛剛刷新（與 11-19 收盤基準分開顯示）";
   }).catch(function(){
     val.textContent=""; state.textContent="獲取失敗，點擊重試";
   }).then(function(){ btn.disabled=false; });
