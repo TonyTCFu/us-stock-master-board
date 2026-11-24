@@ -48,6 +48,13 @@ h4{font-size:13px;margin:14px 0 6px;color:var(--muted);letter-spacing:.04em}
 .card .lab{font-size:12px;color:var(--muted);font-weight:700}
 .card .val{font-size:26px;font-weight:900;line-height:1.25;margin:2px 0}
 .card .det{font-size:12.5px;color:var(--muted)}
+.pnlgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:820px){.pnlgrid{grid-template-columns:1fr}}
+.pnlblock{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 18px 14px}
+.pnlblock h3{margin-top:14px}
+.pnlblock .pval{font-size:25px;font-weight:900;line-height:1.25;margin:2px 0 4px}
+.pnlblock p{margin:6px 0;font-size:13.5px}
+.pnlblock h4{margin:12px 0 4px}
 .up{color:var(--up)}.down{color:var(--down)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:820px){.grid2{grid-template-columns:1fr}}
@@ -199,7 +206,28 @@ function pnlHTML(){
  var buys=BUYS.map(function(r){return '<tr><td data-l="日期">'+r[0]+'</td><td data-l="標的"><b>'+r[1]+'</b></td><td class="num" data-l="成交金額">'+(typeof r[2]==="number"?fmt(r[2]):r[2])+'</td><td class="num" data-l="手續費">'+(typeof r[3]==="number"?fmt(r[3]):"未提供")+'</td></tr>'}).join("");
  var sells=SELLS.map(function(r){return '<tr><td data-l="日期">'+r[0]+'</td><td data-l="標的"><b>'+r[1]+'</b></td><td class="num" data-l="股數">'+r[2]+'</td><td class="num" data-l="成交金額">'+fmt(r[3])+'</td><td class="num" data-l="手續費">'+fmt(r[4])+'</td><td class="num" data-l="投入成本">'+fmt(r[5])+'</td><td class="num '+(r[6]<0?"down":"up")+'" data-l="已實現">'+fmt(r[6])+'</td></tr>'}).join("");
  var h='<section class="panel" id="p-pnl"><h2>損益表 · 完整帳本</h2><p class="sub">同一個帳戶 · 持倉數據 2026-11-23 美股收盤 · 來源：券商資金流水與持倉截圖 · 現價為 11-23 收盤靜態快照，成本為券商口徑</p>';
- h+='<div class="cards"><div class="card"><div class="lab">帳戶總值</div><div class="val mono">$12,092.32</div><div class="det">持倉市值 $11,179.54 ＋ 現金 $912.78 · 單日 +$48.27（對 11-20 $12,044.05）</div></div><div class="card"><div class="lab">累計損益</div><div class="val mono down">−$2,600.96</div><div class="det">−17.70% · 總投入 $14,693.28</div></div><div class="card"><div class="lab">浮動／已實現</div><div class="val mono">−$2,088.96</div><div class="det">已實現 −$439.62 · 手續費 $74.30 · 股息淨收入 +$1.91</div></div><div class="card"><div class="lab">目標口徑</div><div class="val mono">$9,692.02</div><div class="det">距目標 +$4,151.31（+42.83%）· 剩餘 134 天 · 熱度 0.17% · 節流閥二檔</div></div></div>';
+ h+='<div class="pnlgrid">'
+ +'<div class="pnlblock"><h3>帳戶總值</h3><div class="pval mono">$12,092.32</div>'
+ +'<h4>持倉市值 $11,179.54（占 92.45%）</h4><p>14 檔持倉按 2026-11-23 收盤價計價的合計（現價 × 股數逐檔加總）。最大兩檔是 TSM $2,545.20 與 SPCX $2,400.30。這部分不是現金，要賣出才會變成錢，金額隨每個交易日收盤變動。</p>'
+ +'<h4>可用現金 $912.78（占 7.55%）</h4><p>帳戶裡還沒買股票的錢，可以直接用來買入，不必先賣股。來源是總投入扣掉買入成交、加回賣出成交與股息、再扣手續費後的餘額（完整公式見下方「口徑說明」）。</p>'
+ +'<h4>單日變化</h4><p>+$48.27（對 11-20 的 $12,044.05）。</p></div>'
+ +'<div class="pnlblock"><h3>累計損益</h3><div class="pval mono down">−$2,600.96</div>'
+ +'<h4>與總投入的關係</h4><p>累計損益 ＝ 帳戶總值 $12,092.32 − 總投入 $14,693.28 ＝ −$2,600.96，即投入的錢目前少了 17.70%。總投入是歷次換匯入金 $14,105.59 加上 2026-06 SpaceX 早期買入資金 $587.69。</p>'
+ +'<h4>損益組成</h4><p>這筆虧損由四部分組成：還沒賣出的浮動虧損 −$2,088.96、已賣出鎖定的已實現虧損 −$439.62、已付手續費 $74.30，扣回股息淨收入 +$1.91（組成合計與累計損益差 $0.01，為四捨五入）。各部分見下面三個區塊。</p></div>'
+ +'<div class="pnlblock"><h3>浮動損益（未實現）</h3><div class="pval mono down">−$2,088.96</div>'
+ +'<h4>計算方式</h4><p>浮動損益 ＝ 持倉市值 $11,179.54 − 投入成本 $13,268.50 ＝ −$2,088.96（−15.74%）。「浮動」的意思是還沒賣出：只是按 11-23 收盤價估算現在全賣會虧多少，下一個交易日就跟著股價變，不是已成定局的虧損，也不影響帳戶現金。</p>'
+ +'<h4>虧損分布</h4><p>14 檔中 13 檔浮虧，只有 ANT 浮盈 +$7.14（+1.66%）。浮虧最大三檔：MU −$383.10（−35.12%）、TSM −$297.97（−10.48%）、NVDA −$258.30（−20.69%）；逐檔數字見下方持倉表。</p></div>'
+ +'<div class="pnlblock"><h3>已實現損益</h3><div class="pval mono down">−$439.62</div>'
+ +'<h4>計算方式</h4><p>已實現損益 ＝ 賣出成交金額 − 該持倉的投入成本。「已實現」的意思是已經賣出、結果鎖定，不會再隨股價變動。至今共 5 筆賣出：成交合計 +$2,649.72，對應投入成本 $3,089.34，差額 −$439.62（手續費另計，見下一區塊）。</p>'
+ +'<h4>5 筆賣出明細</h4><p>賺錢 2 筆：TEM +$103.35、BEAM +$5.93。虧錢 3 筆：NVDA −$212.46、VRT −$207.10、META −$129.33。逐筆日期與股數見下方「流水 — 賣出」。</p></div>'
+ +'<div class="pnlblock"><h3>手續費與股息收入</h3><div class="pval mono">手續費 $74.30 · 股息 +$1.91</div>'
+ +'<h4>手續費 $74.30（已付成本）</h4><p>買入 36 筆共 $64.70、賣出 5 筆共 $9.60。每筆買入 $1.90、賣出 $1.92，主要是平台使用費 $1.88，其餘為交收費、SEC 規費、CAT 費等零星費用，佣金已免。手續費已從現金扣除、也已反映在累計損益裡；2026-06 兩筆 SPCX 買入的手續費未提供、未計入。下方另有「手續費明細」表。</p>'
+ +'<h4>股息淨收入 +$1.91（已入帳現金）</h4><p>共 4 筆股息：AVGO +$0.90、TSM +$0.85、MU +$0.09、VRT +$0.07。這是扣掉稅 $0.71 與代收費 $0.04 後的淨額（毛額 $2.66），已直接進帳戶現金。金額雖小，但性質和賣股獲利不同：不用賣出持倉就有現金流入。</p></div>'
+ +'<div class="pnlblock"><h3>目標口徑</h3><div class="pval mono">$9,692.02</div>'
+ +'<h4>口徑與進度</h4><p>目標口徑是帳戶總值剔除 SPCX 後的數字：$12,092.32 − SPCX 市值 $2,400.30 ＝ $9,692.02；SPCX 單獨列示、不計入 +5% 目標進度。基線 $13,184.12（2026-10-06），目標 $13,843.33（2027-04-06 前達 +5%）；目前距基線 −$3,492.10（−26.49%），距目標還需 +$4,151.31（+42.83%），剩餘 134 天（已走 48／182 天）。11-23 單日 +$975.78（+11.19%）。</p>'
+ +'<h4>熱度 0.17%（$16.43）</h4><p>熱度衡量「還押在兜底價上方多少風險」：逐檔算（現價 − 兜底價）× 股數，只計現價還在兜底上方的股票，跌破兜底的計 0。目前只有 4 檔站回兜底、有熱度：BEAM $6.80、AVGO $4.65、VRT $2.70、SKHY $2.28，合計 $16.43，占目標總值 0.17%。其餘 8 檔已跌破兜底，風險改由「跌破觸發基本面核對」處理，不再計入熱度。</p><p>熱度上限是目標總值的 6%，即 $581.52。現在 0.17% 遠低於上限，代表目前押在兜底上方的風險很小；但熱度低不等於可以買，還要同時過節流閥這一關。</p>'
+ +'<h4>節流閥二檔</h4><p>節流閥是「虧損期自動收緊新倉」的紀律：拿目標總值和它的高點基準 anchor $11,849.77 比較，回落越深、檔位越緊。目前 $9,692.02 ÷ $11,849.77 ＝ 81.79%，較 anchor 回落 −18.21%，已跌破 −10% 線，落在二檔。</p><p>二檔的動作是：新風險減半（−50%）並凍結新倉，直到目標總值創 10 日權益新高才解除。白話說：還在深虧區間時先收手保本金，不追高、不攤平，等權益真正回升再放行。</p></div>'
+ +'</div>';
  h+='<h3>持倉表（14 檔）</h3><div class="tablewrap"><table class="stack"><thead><tr><th>代號</th><th class="num">股數</th><th class="num">現價</th><th class="num">成本／股</th><th class="num">市值</th><th class="num">投入成本</th><th class="num">浮動盈虧</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="src">持倉市值合計 $11,179.54；浮動盈虧合計 −$2,088.96；總成本 $13,268.50。現價為 2026-11-23 收盤。已實現盈虧維持 −$439.62。</p>';
  h+='<h3>目標口徑（3 個月 +5%）</h3>'+kvTable([["基線","$13,184.12（2026-10-06）"],["目標","$13,843.33（+5%，2027-04-06 前）"],["目標總值（不含 SPCX）","$9,692.02（單日 +$975.78；+11.19%）"],["距基準（實賺）","−$3,492.10（−26.49%，對 baseline $13,184.12）"],["距目標","還需 +$4,151.31（+42.83%），剩餘 134 天（已走 48/182 天）；截止 2027-04-06"],["熱度","$16.43（0.17%，4 隻站回兜底、8 隻仍跌破；上限 6%，上限額 $581.52）；節流閥二檔（目標總值／anchor $11,849.77＝81.79%，較 anchor −18.21%，跌破 −10% 線）"]]);
  h+='<h3>流水 — 買入（36 筆）</h3><p class="src">原表欄位僅日期、標的、成交金額、手續費，無股數欄；每筆股數無法核實，不反推呈現。</p><div class="tablewrap"><table class="stack"><thead><tr><th>日期</th><th>標的</th><th class="num">成交金額</th><th class="num">手續費</th></tr></thead><tbody>'+buys+'<tr><td data-l="日期"><b>合計</b></td><td data-l="標的"></td><td class="num" data-l="成交金額"><b>−$15,276.77</b></td><td class="num" data-l="手續費"><b>−$60.88</b></td></tr></tbody></table></div>';
